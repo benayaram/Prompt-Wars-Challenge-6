@@ -28,14 +28,14 @@ function safeParse<T>(raw: string | null, fallback: T): T {
 }
 
 const STORAGE_KEYS = {
-  ZONES: 'aeroguard_zones_v1',
-  SELECTED_ZONE: 'aeroguard_selected_zone_id_v1',
-  PERSONA: 'aeroguard_active_persona_v1',
-  ROUTINE: 'aeroguard_routine_plan_v1',
-  ROOMS: 'aeroguard_iaq_rooms_v1',
-  PLEDGES: 'aeroguard_community_pledges_v1',
-  LANGUAGE: 'aeroguard_language_v1',
-  ACCESSIBILITY_MODE: 'aeroguard_accessibility_mode_v1',
+  ZONES: 'breatheway_zones_v1',
+  SELECTED_ZONE: 'breatheway_selected_zone_id_v1',
+  PERSONA: 'breatheway_active_persona_v1',
+  ROUTINE: 'breatheway_routine_plan_v1',
+  ROOMS: 'breatheway_iaq_rooms_v1',
+  PLEDGES: 'breatheway_community_pledges_v1',
+  LANGUAGE: 'breatheway_language_v1',
+  ACCESSIBILITY_MODE: 'breatheway_accessibility_mode_v1',
 } as const;
 
 export const storageService = {

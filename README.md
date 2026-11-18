@@ -1,8 +1,8 @@
-# 🛡️ AeroGuard AI — Urban Air Quality & Smog Public Health Assistant
+# 🌿 BreatheWay — Warm and community-friendly, emphasizing safe passage through polluted cities.
 
 ## Empowering vulnerable families and urban communities to navigate winter smog inversions through GenAI routines, low-cost IAQ hacks, and clean-corridor transit planning.
 
-AeroGuard AI is an enterprise-grade public health and environmental resilience platform engineered to protect urban citizens during severe winter smog episodes and industrial stagnation events. By combining real-time multi-pollutant telemetry (PM2.5, PM10, NO2, CO, O3), meteorological boundary layer inversion modeling, server-side Google Gemini intelligence, Dijkstra clean-corridor pathfinding, room-by-room CADR optimization, and collective community action pledges, AeroGuard AI empowers households to dramatically minimize airborne particulate inhalation and carbon footprints.
+BreatheWay is a warm and community-friendly public health and environmental resilience platform engineered to protect urban citizens during severe winter smog episodes and industrial stagnation events. By combining real-time multi-pollutant telemetry (PM2.5, PM10, NO2, CO, O3), meteorological boundary layer inversion modeling, server-side Google Gemini intelligence, Dijkstra clean-corridor pathfinding, room-by-room CADR optimization, and collective community action pledges, BreatheWay empowers households to dramatically minimize airborne particulate inhalation and carbon footprints.
 
 ---
 
@@ -94,7 +94,7 @@ Standard weather and air apps report static citywide AQI numbers without explain
 ## 2. Approach and Logic
 
 ### Overall Implementation Approach
-AeroGuard AI is structured as a decoupled full-stack platform:
+BreatheWay is structured as a decoupled full-stack platform:
 - **Client Layer:** Ultra-lightweight React 19 application using Tailwind CSS v4, custom native SVG visualizers (zero external charting libraries), and accessible twin representation.
 - **Pure Compute Layer (`src/lib/aqiCompute.ts`):** 100% deterministic, side-effect-free algorithms for EPA sub-indexes, CADR mass balance equations, and Dijkstra route optimization.
 - **Defensive Backend Gateway (`server.ts`):** Express 5 server enforcing zero-trust perimeter defenses, 15 KB JSON caps, rate limiting (30 req/min), type guards, SHA-256 LRU response caching (<10ms), and server-side Google Gemini execution.
@@ -181,8 +181,8 @@ AeroGuard AI is structured as a decoupled full-stack platform:
 
 ```bash
 # Clone the repository
-git clone https://github.com/[user]/aeroguard-ai.git
-cd aeroguard-ai
+git clone https://github.com/benayaram/Prompt-Wars-Challenge-6.git
+cd Prompt-Wars-Challenge-6
 
 # Install dependencies
 npm install

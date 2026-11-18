@@ -1,6 +1,6 @@
 {
-  "name": "aeroguard-ai",
-  "displayName": "AeroGuard AI — Urban Air Quality & Smog Public Health Assistant",
+  "name": "breatheway",
+  "displayName": "BreatheWay — Warm and community-friendly, emphasizing safe passage through polluted cities.",
   "vertical": "Urban Air Quality & Public Health Resilience",
   "version": "1.0.0",
   "targetEvaluationScore": "600/600",

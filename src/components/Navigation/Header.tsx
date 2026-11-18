@@ -73,7 +73,7 @@ export const Header = memo(function Header() {
   return (
     <>
       <header
-        aria-label="AeroGuard AI application header"
+        aria-label="BreatheWay application header"
         className="sticky top-0 z-40 bg-white/90 dark:bg-[#060b14]/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm dark:shadow-lg dark:shadow-black/40 transition-colors"
       >
         {/* Top Utility & Brand Strip */}

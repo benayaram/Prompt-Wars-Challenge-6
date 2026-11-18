@@ -73,7 +73,7 @@ export const DIY_HACKS = [
     category: 'Ventilation',
     costRating: '$0 (Free)',
     cadrDelivery: 'Natural displacement',
-    materials: 'Outdoor AQI sensor or AeroGuard real-time monitor',
+    materials: 'Outdoor AQI sensor or BreatheWay real-time monitor',
     instructions: 'Never open windows between 6:00 AM – 10:30 AM (peak winter inversion trap). Only crack opposing windows between 1:30 PM – 3:30 PM when solar radiation breaks the boundary layer.',
     efficiencyBonus: 'Prevents 85% outdoor particulate intrusion',
   },

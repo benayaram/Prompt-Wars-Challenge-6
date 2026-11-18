@@ -80,7 +80,7 @@ export async function getAiRoutineInsights(persona: ValidatedPersona, zone: Vali
   if (aiClient) {
     try {
       const model = aiClient.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
-      const prompt = `You are AeroGuard AI, an expert pulmonary health specialist and urban atmospheric scientist.
+      const prompt = `You are BreatheWay, a warm and community-friendly public health and safe passage assistant.
 Generate a structured JSON response for a daily smog defense routine.
 Profile: ${persona.name} (${persona.subCategory}, Sensitivity: ${persona.sensitivityLevel})
 Urban Zone: ${zone.zoneName}
@@ -103,7 +103,7 @@ export async function getEmergencyAdvisoryText(zone: ValidatedZone, cleanLang: s
   if (aiClient) {
     try {
       const model = aiClient.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
-      const prompt = `You are AeroGuard AI public safety broadcaster. Generate an urgent 2-sentence public safety smog advisory in language "${cleanLang}" for ${zone.zoneName} reporting AQI ${zone.aqi} (PM2.5: ${zone.pm25} ug/m3, boundary inversion: ${zone.inversionRisk}). Focus on masks, indoor sealing, and vulnerable resident welfare. Return ONLY the advisory text.`;
+      const prompt = `You are BreatheWay public safety broadcaster. Generate an urgent 2-sentence public safety smog advisory in language "${cleanLang}" for ${zone.zoneName} reporting AQI ${zone.aqi} (PM2.5: ${zone.pm25} ug/m3, boundary inversion: ${zone.inversionRisk}). Focus on masks, indoor sealing, and vulnerable resident welfare. Return ONLY the advisory text.`;
       const aiResponse = await model.generateContent(prompt);
       const text = aiResponse.response.text().trim();
       if (text) return text;

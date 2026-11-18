@@ -1,6 +1,6 @@
 // ============================================================
 // server.ts
-// Express 5 Backend Gateway for AeroGuard AI
+// Express 5 Backend Gateway for BreatheWay
 // Enforces OWASP Top 10, CWE-209 safe error handling,
 // SHA-256 LRU cache (100-entries), rate limiting, and server-side AI
 // Per SECURITY.md, EFFICIENCY.md, and docs/DECISIONS.md ADR-003
@@ -88,7 +88,7 @@ app.use(express.static(distPath));
 app.get('*splat', (_req: Request, res: Response) => {
   res.sendFile(path.join(distPath, 'index.html'), (err) => {
     if (err) {
-      res.status(200).send('AeroGuard AI Backend Running. Build frontend with `npm run build` to serve SPA.');
+      res.status(200).send('BreatheWay Backend Running. Build frontend with `npm run build` to serve SPA.');
     }
   });
 });
@@ -99,7 +99,7 @@ app.use(safeErrorHandler);
 // 7. Server Listener
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
-    console.log(`[AeroGuard AI] Backend listening on port ${PORT}`);
+    console.log(`[BreatheWay] Backend listening on port ${PORT}`);
   });
 }
 

@@ -1,7 +1,7 @@
-# AeroGuard AI - Implementation Plan & Engineering Specifications
+# BreatheWay - Implementation Plan & Engineering Specifications
 
 ## 1. Executive Summary
-AeroGuard AI is an intelligent urban air quality and smog public health assistant designed for high-density metropolitan areas vulnerable to winter temperature inversions, particulate matter accumulation, and traffic emissions.
+BreatheWay is a warm and community-friendly urban air quality and safe passage assistant designed for high-density metropolitan areas vulnerable to winter temperature inversions, particulate matter accumulation, and traffic emissions.
 
 ## 2. Core Feature Pillars
 1. **Hyperlocal Air Quality & Inversion Telemetry**:

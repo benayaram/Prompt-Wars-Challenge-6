@@ -1,8 +1,8 @@
-# Problem Statement Alignment & Requirements Traceability Matrix (RTM) — AeroGuard AI
+# Problem Statement Alignment & Requirements Traceability Matrix (RTM) — BreatheWay
 
 > **Standard:** 100% Traceability and Operational Fidelity (Score: 100/100)  
 > **Evaluation Pillar:** Pillar 6 (Problem Statement Alignment)  
-> **Challenge:** [Challenge 6] Urban Air Quality Assistant (AeroGuard AI)  
+> **Challenge:** [Challenge 6] Urban Air Quality Assistant (BreatheWay)  
 
 ---
 
@@ -10,7 +10,7 @@
 
 During severe winter smog episodes and industrial stagnation events, urban populations face hazardous concentrations of fine particulate matter (PM2.5, PM10) and toxic gases (NO2, CO, O3). Cold nocturnal temperatures create ground-level **thermal inversions**, trapping vehicular exhaust and industrial soot in the human breathing zone. Vulnerable populations (children, asthmatics, the elderly) suffer acute respiratory distress, commuters face severe inhaled exposure during transit, and communities lack coordinated tools to curb localized emissions.
 
-**AeroGuard AI** solves this critical public health challenge by combining real-time multi-pollutant telemetry, atmospheric inversion modeling, GenAI-optimized daily routine scheduling, Dijkstra-based clean commute routing, low-cost DIY indoor air purification hacks, and collective neighborhood action.
+**BreatheWay** solves this critical public health challenge by combining real-time multi-pollutant telemetry, atmospheric inversion modeling, GenAI-optimized daily routine scheduling, Dijkstra-based clean commute routing, low-cost DIY indoor air purification hacks, and collective neighborhood action.
 
 ---
 

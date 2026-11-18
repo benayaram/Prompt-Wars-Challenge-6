@@ -22,7 +22,7 @@ describe('App Root Layout Rendering', () => {
     expect(screen.getByRole('banner', { name: /application header/i })).toBeInTheDocument();
     expect(screen.getByRole('tabpanel')).toBeInTheDocument();
     expect(screen.getByRole('contentinfo', { name: /application footer/i })).toBeInTheDocument();
-    expect(screen.getAllByText('AeroGuard AI').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('BreatheWay').length).toBeGreaterThan(0);
     expect(screen.getByText('LIVE')).toBeInTheDocument();
   });
 });

@@ -1,14 +1,14 @@
-# Code Quality Manifest — AeroGuard AI
+# Code Quality Manifest — BreatheWay
 
 > **Standard:** Elite Production-Grade Engineering (Score: 100/100)  
 > **Evaluation Pillar:** Pillar 1 (Code Quality)  
-> **Repository:** AeroGuard AI — Urban Air Quality & Smog Public Health Assistant  
+> **Repository:** BreatheWay — Warm and community-friendly, emphasizing safe passage through polluted cities.  
 
 ---
 
 ## 1. Architectural Layer Segregation
 
-AeroGuard AI enforces strict physical and conceptual layer segregation. Business logic, mathematical compute, state management, I/O, and UI presentation are strictly separated to prevent monolithic coupling.
+BreatheWay enforces strict physical and conceptual layer segregation. Business logic, mathematical compute, state management, I/O, and UI presentation are strictly separated to prevent monolithic coupling.
 
 ```text
 src/
@@ -80,7 +80,7 @@ The project is compiled under strict mode in `tsconfig.json`:
 
 ## 3. Linter Cleanliness (Oxlint Verification)
 
-AeroGuard AI is validated using **Oxlint v1.94.0** with strict configuration (`.oxlintrc.json`).
+BreatheWay is validated using **Oxlint v1.94.0** with strict configuration (`.oxlintrc.json`).
 
 ```bash
 $ npm run lint

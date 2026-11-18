@@ -1,14 +1,14 @@
-# Security Architecture & OWASP Defense Blueprint — AeroGuard AI
+# Security Architecture & OWASP Defense Blueprint — BreatheWay
 
 > **Standard:** Zero-Trust Defense-in-Depth (Score: 100/100)  
 > **Evaluation Pillar:** Pillar 2 (Security)  
-> **Repository:** AeroGuard AI — Urban Air Quality & Smog Public Health Assistant  
+> **Repository:** BreatheWay — Warm and community-friendly, emphasizing safe passage through polluted cities.  
 
 ---
 
 ## 1. Zero-Trust Architecture Principles
 
-AeroGuard AI treats all network interfaces, client payloads, and browser environments as potentially untrusted:
+BreatheWay treats all network interfaces, client payloads, and browser environments as potentially untrusted:
 
 1. **Server-Side AI Model Execution Only:**
    The Google Gemini API key (`GEMINI_API_KEY`) is stored exclusively in server environment variables on the Node.js backend (`server.ts`). It is never bundled into client-side JavaScript, never exported via `VITE_` prefixes, and never committed to version control.
@@ -125,7 +125,7 @@ Invalid payloads are rejected with HTTP 400 Bad Request.
 ## 4. Prompt Injection Defense & Sanitization
 
 1. **Control Character Stripping:**  
-   Non-printable ASCII control characters (`\x00` through `\x1f`) can confuse tokenizer boundaries. AeroGuard strips these characters safely:
+   Non-printable ASCII control characters (`\x00` through `\x1f`) can confuse tokenizer boundaries. BreatheWay strips these characters safely:
    ```typescript
    const controlCharPattern = new RegExp('[' + String.fromCharCode(0) + '-' + String.fromCharCode(31) + ']', 'g');
    const cleanText = text.replace(controlCharPattern, '').trim().slice(0, 2000);

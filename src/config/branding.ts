@@ -15,9 +15,9 @@ export const BRANDING = {
   supportEmail: 'support@breatheway.org',
   portalName: 'Community Safe Passage & Clean Air Portal',
 
-  // Core Engine attribution (Preserves test assertions for AeroGuard AI)
-  engineName: 'AeroGuard AI Core',
-  engineBadge: 'Powered by AeroGuard AI Engine',
+  // Core Engine
+  engineName: 'BreatheWay Core',
+  engineBadge: 'Powered by BreatheWay Community Engine',
 
   // Compliance & Standards badges
   standards: [

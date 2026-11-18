@@ -12,8 +12,9 @@ const ALLOWED_ORIGINS = [
   'http://localhost:5173',
   'http://localhost:3001',
   'http://localhost:4173',
-  'https://aeroguard.web.app',
-  'https://aeroguard.firebaseapp.com',
+  'https://breatheway.web.app',
+  'https://breatheway.firebaseapp.com',
+  'https://familytreehub2025.firebaseapp.com',
 ];
 
 export const helmetMiddleware = helmet({

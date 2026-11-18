@@ -66,7 +66,7 @@ const AppShell = memo(function AppShell() {
               </span>
             </div>
             <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
-            <span>Powered by <span className="font-medium text-slate-700 dark:text-slate-300">AeroGuard AI</span> Engine</span>
+            <span>Powered by <span className="font-medium text-slate-700 dark:text-slate-300">BreatheWay</span> Community Engine</span>
             <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
             <span>WCAG 2.2 Level AA Compliant</span>
             <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>

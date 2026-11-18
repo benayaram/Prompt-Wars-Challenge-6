@@ -1,14 +1,14 @@
-# Accessibility Standards & WCAG 2.2 AA Compliance — AeroGuard AI
+# Accessibility Standards & WCAG 2.2 AA Compliance — BreatheWay
 
 > **Standard:** WCAG 2.2 Level AA Full Compliance (Score: 100/100)  
 > **Evaluation Pillar:** Pillar 5 (Accessibility & Inclusivity)  
-> **Repository:** AeroGuard AI — Urban Air Quality & Smog Public Health Assistant  
+> **Repository:** BreatheWay — Warm and community-friendly, emphasizing safe passage through polluted cities.  
 
 ---
 
 ## 1. Compliance Baseline & Core Principles
 
-AeroGuard AI is engineered from the ground up to comply with **WCAG 2.2 Level AA**, ensuring barrier-free access for users of all abilities, including vulnerable populations, elderly citizens, and screen reader users navigating environmental smog emergencies:
+BreatheWay is engineered from the ground up to comply with **WCAG 2.2 Level AA**, ensuring barrier-free access for users of all abilities, including vulnerable populations, elderly citizens, and screen reader users navigating environmental smog emergencies:
 
 - **Perceivable:** Visual graphics have structured auditory/textual alternatives; high-contrast tokens guarantee legibility.
 - **Operable:** Complete keyboard traversability without mouse dependency or keyboard traps.
@@ -23,7 +23,7 @@ The DOM tree is organized into semantic HTML5 landmark tags with descriptive `ar
 
 ```text
 ┌────────────────────────────────────────────────────────┐
-│ <header aria-label="AeroGuard AI application header">   │
+│ <header aria-label="BreatheWay application header">    │
 │   <nav aria-label="Main application tabs">             │
 │     <div role="tablist"> ... </div>                    │
 │   </nav>                                               │
@@ -52,7 +52,7 @@ The DOM tree is organized into semantic HTML5 landmark tags with descriptive `ar
 
 ## 3. The "Twin Representation" Rule for Data Visualizations
 
-Visual diagrams and SVGs are inaccessible to screen readers without structured text counterparts. AeroGuard AI enforces the **Twin Representation Rule** (WCAG SC 1.1.1 Non-text Content):
+Visual diagrams and SVGs are inaccessible to screen readers without structured text counterparts. BreatheWay enforces the **Twin Representation Rule** (WCAG SC 1.1.1 Non-text Content):
 
 ### A. Urban Smog SVG Heatmap
 The spatial smog heatmap SVG is paired with an adjacent `.sr-only` structured list:

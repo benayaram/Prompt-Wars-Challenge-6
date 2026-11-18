@@ -51,7 +51,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
   // Theme State: defaults to 'light' per user requirement
   const [theme, setThemeState] = useState<AppTheme>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('breatheway_theme_v1') || localStorage.getItem('aeropulse_theme_v1');
+      const saved = localStorage.getItem('breatheway_theme_v1');
       if (saved === 'dark' || saved === 'light') return saved;
     }
     return 'light';

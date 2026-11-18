@@ -101,8 +101,7 @@ export const firebaseAuthService = {
         if (
           firebaseErr.code === 'auth/configuration-not-found' ||
           firebaseErr.code === 'auth/operation-not-allowed' ||
-          email.includes('breatheway.org') ||
-          email.includes('aeropulse')
+          email.includes('breatheway.org')
         ) {
           console.warn('[BreatheWay Auth] Falling back to prototype authentication session:', firebaseErr.code || firebaseErr.message);
           const name = email.includes('chen')

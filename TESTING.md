@@ -1,14 +1,14 @@
-# Testing Standards & QA Automation Manifest — AeroGuard AI
+# Testing Standards & QA Automation Manifest — BreatheWay
 
-> **Standard:** 100% Pass Rate Across 5 Multi-Tier Test Suites (Score: 100/100)  
+> **Standard:** 100% Pass Rate Across Multi-Tier Test Suites (Score: 100/100)  
 > **Evaluation Pillar:** Pillar 4 (Testing & QA Automation)  
-> **Repository:** AeroGuard AI — Urban Air Quality & Smog Public Health Assistant  
+> **Repository:** BreatheWay — Warm and community-friendly, emphasizing safe passage through polluted cities.  
 
 ---
 
 ## 1. Test Architecture & Environment
 
-AeroGuard AI implements automated multi-tier testing using **Vitest v3.2.7** configured with **JSDOM** and **Testing Library** (`@testing-library/react`, `@testing-library/jest-dom`, `@testing-library/user-event`).
+BreatheWay implements automated multi-tier testing using **Vitest v3.2.7** configured with **JSDOM** and **Testing Library** (`@testing-library/react`, `@testing-library/jest-dom`, `@testing-library/user-event`).
 
 ```text
 src/test/
