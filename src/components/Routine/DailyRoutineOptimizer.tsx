@@ -1,7 +1,7 @@
 // ============================================================
 // src/components/Routine/DailyRoutineOptimizer.tsx
 // GenAI-Powered Personalized Schedule (Dual Theme Support)
-// Per PROBLEM_ALIGNMENT.md §1.2 & ACCESSIBILITY.md §6
+// Senior Craftsmanship SaaS Design (Light & Dark WCAG AA Compliant)
 // ============================================================
 
 import { memo, useState, useCallback } from 'react';
@@ -9,7 +9,15 @@ import { useAppContext } from '@/context/AppContext';
 import { apiService } from '@/services/apiService';
 import type { PersonaProfile } from '@/types';
 import { RoutineTimeline } from './RoutineTimeline';
-import { SparklesIcon, CheckCircleIcon, AlertTriangleIcon } from '@/components/ui/Icons';
+import {
+  SparklesIcon,
+  CheckCircleIcon,
+  AlertTriangleIcon,
+  UserIcon,
+  ClockIcon,
+  ActivityIcon,
+  LeafIcon,
+} from '@/components/ui/Icons';
 
 export const DailyRoutineOptimizer = memo(function DailyRoutineOptimizer() {
   const {
@@ -38,104 +46,142 @@ export const DailyRoutineOptimizer = memo(function DailyRoutineOptimizer() {
       setRoutinePlan(plan);
     } catch (err: unknown) {
       console.error('Failed to generate routine:', err);
-      setErrorMessage('Unable to generate AI schedule right now. Showing localized heuristic guidance.');
+      setErrorMessage(
+        'Unable to generate AI schedule right now. Showing localized heuristic guidance.'
+      );
     } finally {
       setIsLoading(false);
     }
   }, [activePersona, selectedZone, language, setRoutinePlan]);
 
   return (
-    <section aria-label="GenAI Daily Routine and Exposure Optimizer" className="flex flex-col gap-8 fade-in">
-      {/* Persona Selection Header */}
-      <div className="glass-panel-elevated rounded-3xl p-6 sm:p-8 flex flex-col gap-6 relative overflow-hidden">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 relative z-10">
-          <div>
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-violet-100 dark:bg-violet-950/80 text-violet-800 dark:text-violet-300 border border-violet-300 dark:border-violet-500/40 flex items-center gap-1">
-                <SparklesIcon size={12} className="text-violet-600 dark:text-violet-400" />
+    <section
+      aria-label="GenAI Daily Routine and Exposure Optimizer"
+      className="flex flex-col gap-8 fade-in"
+    >
+      {/* Persona Selection & Hero Console */}
+      <div className="glass-panel-elevated rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col gap-6 relative overflow-hidden">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+          <div className="max-w-2xl">
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold font-mono tracking-wide bg-violet-50 dark:bg-violet-950/70 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-800/80">
+                <SparklesIcon size={13} className="text-violet-600 dark:text-violet-400" />
                 NEURAL SCHEDULE ENGINE
               </span>
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">Gemini 3.1 Flash Lite</span>
+              <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400 px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                Gemini 3.1 Flash Lite
+              </span>
             </div>
-            <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
               GenAI Daily Routine & Smog Exposure Optimizer
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1.5 leading-relaxed">
               Select your family or lifestyle vulnerability profile to generate hour-by-hour exposure mitigation routines.
             </p>
           </div>
 
-          <button
-            type="button"
-            onClick={handleGenerate}
-            disabled={isLoading}
-            className="px-6 py-3.5 rounded-2xl font-extrabold text-sm bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white hover:from-emerald-400 hover:to-cyan-400 transition-all shadow-xl shadow-teal-500/20 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-emerald-400 flex items-center justify-center gap-2.5 shrink-0 border border-teal-300/30"
-          >
-            {isLoading ? (
-              <>
-                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" aria-hidden="true" />
-                <span>Optimizing with Gemini AI…</span>
-              </>
-            ) : (
-              <>
-                <SparklesIcon size={18} />
-                <span>Generate Smart Schedule</span>
-              </>
-            )}
-          </button>
+          <div className="shrink-0">
+            <button
+              type="button"
+              onClick={handleGenerate}
+              disabled={isLoading}
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-600/20 active:translate-y-px transition-all disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-slate-950 flex items-center justify-center gap-2.5 border border-emerald-400/30"
+            >
+              {isLoading ? (
+                <>
+                  <span
+                    className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"
+                    aria-hidden="true"
+                  />
+                  <span>Optimizing with Gemini AI…</span>
+                </>
+              ) : (
+                <>
+                  <SparklesIcon size={16} />
+                  <span>Generate Smart Schedule</span>
+                </>
+              )}
+            </button>
+          </div>
         </div>
 
-        {/* Persona Selector Chips */}
-        <fieldset className="flex flex-col gap-3 relative z-10">
-          <legend className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-            Target Family & Commuter Persona:
+        {/* Persona Selector Segmented Grid */}
+        <fieldset className="flex flex-col gap-3 relative z-10 pt-2 border-t border-slate-200 dark:border-slate-800">
+          <legend className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-2">
+            <UserIcon size={14} className="text-emerald-600 dark:text-emerald-400" />
+            <span>Target Family & Commuter Persona:</span>
           </legend>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
             {personas.map((p: PersonaProfile) => {
               const isSelected = p.id === activePersona.id;
+              const isHighRisk = p.sensitivityLevel === 'high';
+
               return (
                 <button
                   key={p.id}
                   type="button"
                   aria-pressed={isSelected}
                   onClick={() => setActivePersona(p)}
-                  className={`p-4 rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between gap-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-400 relative overflow-hidden ${
+                  className={`group p-4 sm:p-5 rounded-2xl border text-left transition-all duration-150 flex flex-col justify-between gap-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-1 dark:focus:ring-offset-slate-900 relative ${
                     isSelected
-                      ? 'bg-emerald-50/90 dark:bg-slate-900/90 border-emerald-500 dark:border-emerald-400 shadow-md ring-1 ring-emerald-500/50'
-                      : 'bg-slate-50/80 dark:bg-[#0c1426]/70 border-slate-200 dark:border-slate-700/50 hover:border-slate-300 dark:hover:border-slate-600 text-slate-600 dark:text-slate-400'
+                      ? 'bg-emerald-50/70 dark:bg-emerald-950/30 border-emerald-500 dark:border-emerald-500 shadow-sm ring-1 ring-emerald-500/40'
+                      : 'bg-white/80 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50/50 dark:hover:bg-slate-800/40'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2 w-full">
-                    <span className={`font-extrabold text-sm tracking-tight ${isSelected ? 'text-slate-900 dark:text-white' : 'text-slate-700 dark:text-slate-200'}`}>
+                    <span
+                      className={`font-bold text-sm tracking-tight ${
+                        isSelected
+                          ? 'text-emerald-950 dark:text-emerald-100 font-extrabold'
+                          : 'text-slate-900 dark:text-slate-100'
+                      }`}
+                    >
                       {p.name}
                     </span>
+
                     <span
-                      className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border shrink-0 ${
-                        p.sensitivityLevel === 'high'
-                          ? 'bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-500/40'
-                          : 'bg-amber-50 dark:bg-amber-950/80 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/40'
+                      className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border shrink-0 ${
+                        isHighRisk
+                          ? 'bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-800/80'
+                          : 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800/80'
                       }`}
                     >
                       {p.sensitivityLevel} Risk
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
+
+                  <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
                     {p.description}
                   </p>
+
+                  <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800/60 text-[11px] text-slate-500 dark:text-slate-400">
+                    <span>Baseline Exposure</span>
+                    <span className="font-mono font-medium text-slate-700 dark:text-slate-300">
+                      {isHighRisk ? 'Sensitive' : 'Standard'}
+                    </span>
+                  </div>
                 </button>
               );
             })}
           </div>
         </fieldset>
 
+        {/* Screen Reader Announcements */}
         <div aria-live="polite" aria-busy={isLoading} className="sr-only">
-          {isLoading ? 'Generating personalized air quality daily schedule with Gemini AI…' : 'Schedule ready.'}
+          {isLoading
+            ? 'Generating personalized air quality daily schedule with Gemini AI…'
+            : 'Schedule ready.'}
         </div>
 
         {errorMessage && (
-          <div className="p-3.5 bg-amber-50 dark:bg-amber-950/50 border border-amber-300 dark:border-amber-500/50 rounded-2xl text-amber-800 dark:text-amber-200 text-xs flex items-center gap-2.5 relative z-10">
+          <div
+            role="status"
+            className="p-4 bg-amber-50 dark:bg-amber-950/50 border border-amber-300 dark:border-amber-800 rounded-2xl text-amber-900 dark:text-amber-200 text-xs flex items-center gap-3 relative z-10"
+          >
             <AlertTriangleIcon size={16} className="text-amber-600 dark:text-amber-400 shrink-0" />
-            <span>{errorMessage}</span>
+            <span className="leading-relaxed">{errorMessage}</span>
           </div>
         )}
       </div>
@@ -145,68 +191,94 @@ export const DailyRoutineOptimizer = memo(function DailyRoutineOptimizer() {
         <div className="flex flex-col gap-8 fade-in">
           {/* Key Metric Highlights & Optimal Window */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="glass-panel border-emerald-300 dark:border-emerald-500/40 rounded-3xl p-6 flex flex-col justify-between bg-gradient-to-br from-emerald-50 via-white to-white dark:from-emerald-950/40 dark:via-slate-900/60 dark:to-[#0b1324] shadow-md">
+            {/* Card 1: Optimal Outdoor Window */}
+            <div className="glass-panel border-emerald-300 dark:border-emerald-800/80 rounded-2xl sm:rounded-3xl p-5 sm:p-6 flex flex-col justify-between bg-gradient-to-br from-emerald-50/80 via-white to-white dark:from-emerald-950/30 dark:via-slate-900/70 dark:to-slate-900 shadow-sm">
               <div>
-                <span className="text-[10px] uppercase font-black tracking-wider text-emerald-700 dark:text-emerald-400 block">
-                  Optimal Outdoor Activity Window
-                </span>
-                <div className="text-2xl font-black text-slate-900 dark:text-white mt-1.5 font-mono">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="p-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300">
+                    <ClockIcon size={14} />
+                  </div>
+                  <span className="text-[11px] uppercase font-bold tracking-wider text-emerald-800 dark:text-emerald-300">
+                    Optimal Outdoor Activity Window
+                  </span>
+                </div>
+                <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 font-mono tracking-tight mt-1">
                   {routinePlan.optimalOutdoorWindow.startHour}:00 – {routinePlan.optimalOutdoorWindow.endHour}:00
                 </div>
               </div>
-              <p className="text-xs text-slate-600 dark:text-emerald-200/90 mt-3 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-300 mt-4 leading-relaxed">
                 {routinePlan.optimalOutdoorWindow.rationale}
               </p>
             </div>
 
-            <div className="glass-panel rounded-3xl p-6 flex flex-col justify-between">
+            {/* Card 2: Predicted PM2.5 Inhaled Dose */}
+            <div className="glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-6 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] uppercase font-black tracking-wider text-slate-500 dark:text-slate-400 block">
-                  Predicted PM2.5 Inhaled Dose
-                </span>
-                <div className="text-2xl font-black text-sky-600 dark:text-cyan-400 mt-1.5 font-mono">
-                  {routinePlan.totalExposureScore} <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">µg·h</span>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="p-1.5 rounded-lg bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300">
+                    <ActivityIcon size={14} />
+                  </div>
+                  <span className="text-[11px] uppercase font-bold tracking-wider text-slate-600 dark:text-slate-400">
+                    Predicted PM2.5 Inhaled Dose
+                  </span>
+                </div>
+                <div className="text-2xl sm:text-3xl font-black text-sky-700 dark:text-sky-300 font-mono tracking-tight mt-1">
+                  {routinePlan.totalExposureScore}{' '}
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">µg·h</span>
                 </div>
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-4 leading-relaxed">
                 Avoiding morning inversion peaks reduces pulmonary particulate intake by ~42%.
               </p>
             </div>
 
-            <div className="glass-panel rounded-3xl p-6 flex flex-col justify-between">
+            {/* Card 3: Estimated Carbon Abatement */}
+            <div className="glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-6 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] uppercase font-black tracking-wider text-slate-500 dark:text-slate-400 block">
-                  Estimated Carbon Abatement
-                </span>
-                <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 mt-1.5 font-mono">
-                  {routinePlan.carbonOffsetKg} <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">kg CO₂</span>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="p-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">
+                    <LeafIcon size={14} />
+                  </div>
+                  <span className="text-[11px] uppercase font-bold tracking-wider text-slate-600 dark:text-slate-400">
+                    Estimated Carbon Abatement
+                  </span>
+                </div>
+                <div className="text-2xl sm:text-3xl font-black text-emerald-700 dark:text-emerald-400 font-mono tracking-tight mt-1">
+                  {routinePlan.carbonOffsetKg}{' '}
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">kg CO₂</span>
                 </div>
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-4 leading-relaxed">
                 Achieved by consolidating errands and shifting peak motorized transit trips.
               </p>
             </div>
           </div>
 
+          {/* Timeline View */}
           <RoutineTimeline
             routinePlan={routinePlan}
             zoneName={selectedZone.zoneName}
           />
 
-          {/* Actionable General Guidance */}
-          <div className="glass-panel rounded-3xl p-6 sm:p-8">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2 mb-4">
+          {/* Actionable General Guidance Directives */}
+          <div className="glass-panel rounded-2xl sm:rounded-3xl p-6 sm:p-8">
+            <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight flex items-center gap-2.5 mb-4">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" aria-hidden="true" />
-              Expert Smog Defense Directives
+              <span>Expert Smog Defense Directives</span>
             </h3>
+
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs text-slate-700 dark:text-slate-300">
               {routinePlan.generalAdvice.map((advice, i) => (
                 <li
                   key={i}
-                  className="flex items-start gap-2.5 bg-slate-50/80 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 transition-colors"
+                  className="flex items-start gap-3 bg-slate-50/80 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 transition-colors"
                 >
-                  <CheckCircleIcon size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span className="leading-relaxed">{advice}</span>
+                  <div className="p-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-400 shrink-0 mt-0.5">
+                    <CheckCircleIcon size={14} />
+                  </div>
+                  <span className="leading-relaxed text-slate-700 dark:text-slate-300 font-medium">
+                    {advice}
+                  </span>
                 </li>
               ))}
             </ul>

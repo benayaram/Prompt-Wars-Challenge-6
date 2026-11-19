@@ -1,6 +1,7 @@
 // ============================================================
 // src/components/ui/Card.tsx
-// Modern Glassmorphic Container & Card System
+// Precision Container & Card System (Linear/Stripe Craftsmanship)
+// Dual Theme (Light & Dark) Support & Clean Spatial Hierarchy
 // ============================================================
 
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -17,11 +18,11 @@ export function Card({
   ...props
 }: CardProps) {
   const variantStyles = {
-    default: 'glass-panel rounded-3xl p-6',
-    elevated: 'glass-panel-elevated rounded-3xl p-6 shadow-2xl',
-    interactive: 'glass-panel glass-panel-interactive rounded-3xl p-6 cursor-pointer',
+    default: 'glass-panel rounded-2xl p-5 sm:p-6',
+    elevated: 'glass-panel-elevated rounded-2xl p-5 sm:p-6',
+    interactive: 'glass-panel glass-panel-interactive rounded-2xl p-5 sm:p-6 cursor-pointer',
     accent:
-      'bg-gradient-to-br from-emerald-950/40 via-slate-900/80 to-[#0b1324] border border-emerald-500/30 rounded-3xl p-6 shadow-xl',
+      'bg-emerald-50/70 border border-emerald-200/90 dark:bg-emerald-950/20 dark:border-emerald-500/30 rounded-2xl p-5 sm:p-6 shadow-sm',
   };
 
   return (
@@ -50,7 +51,7 @@ export function CardTitle({
 }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className={`text-lg font-bold text-white tracking-tight flex items-center gap-2 ${className}`}
+      className={`text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2 ${className}`}
       {...props}
     >
       {children}
@@ -64,7 +65,7 @@ export function CardDescription({
   ...props
 }: HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <p className={`text-xs text-slate-400 leading-relaxed ${className}`} {...props}>
+    <p className={`text-xs text-slate-500 dark:text-slate-400 leading-relaxed ${className}`} {...props}>
       {children}
     </p>
   );
@@ -89,7 +90,7 @@ export function CardFooter({
 }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={`mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between gap-3 ${className}`}
+      className={`mt-6 pt-4 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between gap-3 ${className}`}
       {...props}
     >
       {children}

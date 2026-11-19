@@ -1,11 +1,12 @@
 // ============================================================
 // src/components/Routine/RoutineTimeline.tsx
-// Modernized Hour-by-Hour Exposure Schedule Timeline (Dual Theme)
+// Senior Craftsmanship Hour-by-Hour Exposure Schedule Timeline
+// Dual Theme (Light & Dark) with WCAG 2.2 AA Contrast
 // ============================================================
 
 import { memo } from 'react';
 import type { DailyRoutinePlan } from '@/types';
-import { RoutineIcon } from '@/components/ui/Icons';
+import { RoutineIcon, ClockIcon, ActivityIcon, AlertTriangleIcon, CheckCircleIcon } from '@/components/ui/Icons';
 
 interface RoutineTimelineProps {
   routinePlan: DailyRoutinePlan;
@@ -17,23 +18,35 @@ export const RoutineTimeline = memo(function RoutineTimeline({
   zoneName,
 }: RoutineTimelineProps) {
   return (
-    <div className="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col gap-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+    <div className="glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col gap-6">
+      {/* Timeline Section Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-slate-200 dark:border-slate-800">
         <div>
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-            <RoutineIcon size={20} className="text-emerald-600 dark:text-emerald-400" />
-            Hour-by-Hour Exposure & Routine Timeline
-          </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-            Tailored for {routinePlan.persona} in {zoneName}
-          </p>
+          <div className="flex items-center gap-2">
+            <div className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/80 text-emerald-600 dark:text-emerald-400">
+              <RoutineIcon size={18} />
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                Hour-by-Hour Exposure & Routine Timeline
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Tailored for <span className="font-semibold text-slate-700 dark:text-slate-300">{routinePlan.persona}</span> in {zoneName}
+              </p>
+            </div>
+          </div>
         </div>
-        <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-900/80 px-3 py-1 rounded-xl border border-slate-200 dark:border-slate-800 self-start sm:self-auto">
-          24-Hour Predictive Window
-        </span>
+
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-900/90 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800">
+            <ClockIcon size={13} className="text-slate-400 dark:text-slate-500" />
+            24-Hour Predictive Window
+          </span>
+        </div>
       </div>
 
-      <div className="flex flex-col gap-3">
+      {/* Hourly Schedule Track */}
+      <div className="relative flex flex-col gap-3">
         {routinePlan.hourlySchedule.map((slot) => {
           const isOutdoor = slot.recommendation === 'safe-outdoor';
           const isIndoorOnly = slot.recommendation === 'indoor-only';
@@ -41,56 +54,80 @@ export const RoutineTimeline = memo(function RoutineTimeline({
           return (
             <div
               key={slot.hour}
-              className={`p-4 rounded-2xl border transition-all duration-150 flex flex-col md:flex-row md:items-center justify-between gap-4 ${
+              className={`group relative p-4 sm:p-5 rounded-2xl border transition-all duration-200 flex flex-col lg:flex-row lg:items-center justify-between gap-4 ${
                 isIndoorOnly
-                  ? 'bg-rose-50/70 dark:bg-rose-950/20 border-rose-200 dark:border-rose-500/30 hover:border-rose-300'
+                  ? 'bg-rose-50/50 hover:bg-rose-50/80 dark:bg-rose-950/20 dark:hover:bg-rose-950/30 border-rose-200/90 dark:border-rose-900/50'
                   : isOutdoor
-                  ? 'bg-emerald-50/70 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-500/40 hover:border-emerald-300'
-                  : 'bg-slate-50/80 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-slate-300'
+                  ? 'bg-emerald-50/50 hover:bg-emerald-50/80 dark:bg-emerald-950/20 dark:hover:bg-emerald-950/30 border-emerald-200/90 dark:border-emerald-900/50'
+                  : 'bg-slate-50/70 hover:bg-slate-50 dark:bg-slate-900/60 dark:hover:bg-slate-900/90 border-slate-200 dark:border-slate-800'
               }`}
             >
-              {/* Time & Mode Pill */}
-              <div className="flex items-center gap-3.5 min-w-[150px]">
-                <span className="text-base font-black text-slate-900 dark:text-white font-mono tracking-tight">
-                  {slot.timeLabel}
-                </span>
+              {/* Left Column: Time & Classification Pill */}
+              <div className="flex items-center gap-3 min-w-[170px] shrink-0">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-base sm:text-lg font-black font-mono tracking-tight text-slate-900 dark:text-slate-100">
+                    {slot.timeLabel}
+                  </span>
+                </div>
+
                 <span
-                  className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full border ${
+                  className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${
                     isIndoorOnly
-                      ? 'bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300 border-rose-300 dark:border-rose-500/40'
+                      ? 'bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300 border-rose-300 dark:border-rose-800/80'
                       : isOutdoor
-                      ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/40'
-                      : 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-500/40'
+                      ? 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800/80'
+                      : 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-800/80'
                   }`}
                 >
-                  {slot.recommendation.replace('-', ' ')}
+                  {isIndoorOnly ? (
+                    <AlertTriangleIcon size={11} className="text-rose-600 dark:text-rose-400" />
+                  ) : isOutdoor ? (
+                    <CheckCircleIcon size={11} className="text-emerald-600 dark:text-emerald-400" />
+                  ) : (
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                  )}
+                  <span>{slot.recommendation.replace('-', ' ')}</span>
                 </span>
               </div>
 
-              {/* Activity & Advisory */}
-              <div className="flex-1">
-                <h4 className="font-bold text-slate-900 dark:text-white text-sm tracking-tight">{slot.activity}</h4>
-                <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5 leading-relaxed">{slot.healthImpactNotes}</p>
+              {/* Middle Column: Activity & Clinical Advisory */}
+              <div className="flex-1 min-w-0">
+                <h4 className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 tracking-tight leading-snug">
+                  {slot.activity}
+                </h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                  {slot.healthImpactNotes}
+                </p>
               </div>
 
-              {/* Predicted AQI & Inversion Likelihood */}
-              <div className="flex items-center gap-4 text-xs min-w-[180px] justify-end border-t md:border-t-0 pt-2 md:pt-0 border-slate-200 dark:border-slate-800">
-                <div className="text-right">
-                  <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold tracking-wider">
+              {/* Right Column: Telemetry Metrics (AQI & Inversion Risk) */}
+              <div className="flex items-center gap-4 text-xs shrink-0 justify-between lg:justify-end border-t lg:border-t-0 pt-3 lg:pt-0 border-slate-200 dark:border-slate-800">
+                <div className="text-left lg:text-right">
+                  <div className="text-[10px] uppercase font-bold tracking-wider text-slate-500 dark:text-slate-400">
                     Predicted AQI
                   </div>
-                  <div className="font-extrabold text-slate-900 dark:text-white font-mono mt-0.5">{slot.predictedAQI}</div>
+                  <div className="font-mono font-bold text-sm text-slate-900 dark:text-slate-100 mt-0.5 flex items-center lg:justify-end gap-1.5">
+                    <ActivityIcon size={13} className="text-slate-400 dark:text-slate-500" />
+                    <span>{slot.predictedAQI}</span>
+                  </div>
                 </div>
-                <div className="text-right pl-3 border-l border-slate-200 dark:border-slate-800">
-                  <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold tracking-wider">
+
+                <div className="text-right pl-4 border-l border-slate-200 dark:border-slate-800">
+                  <div className="text-[10px] uppercase font-bold tracking-wider text-slate-500 dark:text-slate-400">
                     Inversion Risk
                   </div>
-                  <div
-                    className={`font-black capitalize mt-0.5 ${
-                      slot.inversionLikelihood === 'high' ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'
-                    }`}
-                  >
-                    {slot.inversionLikelihood}
+                  <div className="mt-0.5">
+                    <span
+                      className={`inline-block font-bold text-xs capitalize ${
+                        slot.inversionLikelihood === 'high'
+                          ? 'text-rose-700 dark:text-rose-400'
+                          : slot.inversionLikelihood === 'moderate'
+                          ? 'text-amber-700 dark:text-amber-400'
+                          : 'text-emerald-700 dark:text-emerald-400'
+                      }`}
+                    >
+                      {slot.inversionLikelihood}
+                    </span>
                   </div>
                 </div>
               </div>

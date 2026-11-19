@@ -1,7 +1,7 @@
 // ============================================================
 // src/components/ui/Button.tsx
-// Unified Design-System Button Component
-// Per COMPONENT REDESIGN §7 & ACCESSIBILITY §19
+// Precision Design-System Button Component (Linear/Stripe Craftsmanship)
+// Full Dual Theme Support (Light & Dark) & WCAG 2.2 AA Focus Indicators
 // ============================================================
 
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
@@ -33,28 +33,28 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   ref
 ) {
   const baseStyles =
-    'relative inline-flex items-center justify-center font-bold tracking-tight rounded-xl transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:opacity-50 disabled:cursor-not-allowed select-none active:scale-[0.98]';
+    'relative inline-flex items-center justify-center font-semibold tracking-tight rounded-xl transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 disabled:opacity-50 disabled:cursor-not-allowed select-none active:scale-[0.98] cursor-pointer';
 
   const sizeStyles: Record<ButtonSize, string> = {
     xs: 'px-2.5 py-1 text-xs gap-1.5',
     sm: 'px-3.5 py-1.5 text-xs gap-2',
-    md: 'px-4 py-2.5 text-sm gap-2',
-    lg: 'px-6 py-3.5 text-base gap-2.5',
+    md: 'px-4 py-2 text-sm gap-2',
+    lg: 'px-5 py-2.5 text-base gap-2.5',
   };
 
   const variantStyles: Record<ButtonVariant, string> = {
     primary:
-      'bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:from-emerald-400 hover:to-teal-500 shadow-md shadow-emerald-950/50 border border-emerald-400/30 hover:shadow-emerald-500/20 hover:shadow-lg',
+      'bg-emerald-600 hover:bg-emerald-700 text-white border border-emerald-700/20 shadow-xs dark:bg-emerald-500 dark:hover:bg-emerald-400 dark:text-slate-950 dark:border-emerald-400/40',
     secondary:
-      'bg-slate-800/80 text-slate-200 hover:bg-slate-700 hover:text-white border border-slate-700/60 shadow-sm',
+      'bg-white hover:bg-slate-50 text-slate-800 border border-slate-200/90 shadow-xs dark:bg-slate-800/90 dark:hover:bg-slate-700 dark:text-slate-100 dark:border-slate-700/80',
     outline:
-      'bg-transparent text-slate-300 hover:text-white border border-slate-700 hover:border-slate-500 hover:bg-slate-800/40',
+      'bg-transparent hover:bg-slate-100/70 text-slate-700 border border-slate-300 dark:hover:bg-slate-800/60 dark:text-slate-200 dark:border-slate-700',
     ghost:
-      'bg-transparent text-slate-400 hover:text-white hover:bg-slate-800/50',
+      'bg-transparent hover:bg-slate-100 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800/60',
     danger:
-      'bg-gradient-to-r from-rose-900/80 to-red-900/80 text-rose-100 hover:from-rose-800 hover:to-red-800 border border-rose-500/40 shadow-sm shadow-rose-950/40',
+      'bg-rose-600 hover:bg-rose-700 text-white border border-rose-700/20 shadow-xs dark:bg-rose-600 dark:hover:bg-rose-500 dark:text-white dark:border-rose-500/30',
     ai:
-      'bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white hover:from-emerald-400 hover:via-teal-400 hover:to-cyan-400 shadow-lg shadow-teal-950/50 border border-cyan-400/30 hover:shadow-cyan-500/20',
+      'bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/40 shadow-xs dark:bg-slate-900/90 dark:hover:bg-slate-800 dark:text-emerald-300 dark:border-emerald-500/40',
   };
 
   return (

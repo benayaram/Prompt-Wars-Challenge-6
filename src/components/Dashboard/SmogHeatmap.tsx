@@ -1,10 +1,10 @@
 // ============================================================
 // src/components/Dashboard/SmogHeatmap.tsx
-// High-Fidelity Spatial Smog Dispersion Heatmap (Dual Theme)
-// WCAG SC 1.1.1 Twin Representation & Native SVG
+// High-Fidelity Geospatial Smog Dispersion Telemetry Grid (Dual Theme)
+// WCAG SC 1.1.1 Twin Representation & Native SVG Geospatial Canvas
 // ============================================================
 
-import { memo } from 'react';
+import { memo, useId } from 'react';
 import type { UrbanZone } from '@/types';
 import { getAQIColor } from '@/lib/aqiCompute';
 import { useAppContext } from '@/context/AppContext';
@@ -15,12 +15,28 @@ interface SmogHeatmapProps {
   onSelectZone: (zoneId: string) => void;
 }
 
-const NODE_COORDINATES = [
-  { cx: 300, cy: 160 }, // Central Sector
-  { cx: 160, cy: 75 },  // North Industrial
-  { cx: 450, cy: 90 },  // Residential Sector
-  { cx: 460, cy: 235 }, // Riverside Sector
-  { cx: 170, cy: 230 }, // Transit Hub
+interface NodeGeoConfig {
+  cx: number;
+  cy: number;
+  code: string;
+  shortLabel: string;
+  quadrant: string;
+}
+
+const ZONE_GEO_MAP: Record<string, NodeGeoConfig> = {
+  'Z-CENTRAL': { cx: 310, cy: 155, code: 'CBD-01', shortLabel: 'Central CBD', quadrant: 'Core Metro' },
+  'Z-INDUSTRIAL': { cx: 145, cy: 85, code: 'IND-02', shortLabel: 'North Industrial', quadrant: 'NW Sector' },
+  'Z-RESIDENTIAL': { cx: 465, cy: 95, code: 'RES-03', shortLabel: 'Greenwood Res.', quadrant: 'NE Sector' },
+  'Z-RIVERSIDE': { cx: 475, cy: 235, code: 'ECO-04', shortLabel: 'Riverside Corridor', quadrant: 'SE Sector' },
+  'Z-TRANSIT': { cx: 155, cy: 230, code: 'HUB-05', shortLabel: 'Intermodal Hub', quadrant: 'SW Sector' },
+};
+
+const FALLBACK_POSITIONS: NodeGeoConfig[] = [
+  { cx: 310, cy: 155, code: 'CBD-01', shortLabel: 'Central CBD', quadrant: 'Core Metro' },
+  { cx: 145, cy: 85, code: 'IND-02', shortLabel: 'North Industrial', quadrant: 'NW Sector' },
+  { cx: 465, cy: 95, code: 'RES-03', shortLabel: 'Greenwood Res.', quadrant: 'NE Sector' },
+  { cx: 475, cy: 235, code: 'ECO-04', shortLabel: 'Riverside Corridor', quadrant: 'SE Sector' },
+  { cx: 155, cy: 230, code: 'HUB-05', shortLabel: 'Intermodal Hub', quadrant: 'SW Sector' },
 ];
 
 export const SmogHeatmap = memo(function SmogHeatmap({
@@ -30,13 +46,25 @@ export const SmogHeatmap = memo(function SmogHeatmap({
 }: SmogHeatmapProps) {
   const { theme } = useAppContext();
   const isDark = theme === 'dark';
+  const instanceId = useId().replace(/:/g, '');
+
+  const selectedZone = zones.find((z) => z.zoneId === selectedZoneId) || zones[0];
 
   return (
-    <div className="lg:col-span-7 glass-panel rounded-3xl p-6 flex flex-col gap-4 relative overflow-hidden">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-7 flex flex-col justify-between gap-5 border border-slate-200/80 dark:border-slate-800 shadow-sm relative overflow-hidden transition-colors">
+      {/* Heatmap Header with Status & Precision Legend */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            <span className="text-[10px] font-black tracking-widest uppercase text-emerald-600 dark:text-emerald-400 font-mono">
+              LIVE DISPERSION TELEMETRY
+            </span>
+          </div>
           <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
             Urban Smog Heatmap & Dispersion Grid
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -44,22 +72,23 @@ export const SmogHeatmap = memo(function SmogHeatmap({
           </p>
         </div>
 
-        {/* Legend */}
-        <div className="flex items-center gap-2 text-[10px] text-slate-600 dark:text-slate-400 font-semibold bg-slate-100 dark:bg-slate-900/80 px-2.5 py-1 rounded-xl border border-slate-200 dark:border-slate-800">
-          <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+        {/* Precision Color Legend */}
+        <div className="flex items-center gap-1.5 text-[10px] font-semibold bg-slate-50 dark:bg-slate-900/90 px-3 py-1.5 rounded-xl border border-slate-200/80 dark:border-slate-800 shrink-0">
+          <span className="text-slate-400 font-mono mr-1">AQI:</span>
+          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
             &lt;50
           </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-amber-500" />
+          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
             51-150
           </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-orange-500" />
+          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-orange-700 dark:text-orange-300 bg-orange-50 dark:bg-orange-950/40">
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
             151-200
           </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-rose-500" />
+          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/40">
+            <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
             &gt;200
           </span>
         </div>
@@ -77,199 +106,297 @@ export const SmogHeatmap = memo(function SmogHeatmap({
         ))}
       </ul>
 
-      {/* Native High-Performance SVG Heatmap Canvas */}
-      <div className="w-full bg-slate-100 dark:bg-[#040812] rounded-2xl border border-slate-200 dark:border-slate-800/80 p-3 overflow-hidden relative shadow-inner transition-colors duration-200">
+      {/* Native High-Performance SVG Geospatial Heatmap Canvas */}
+      <div className="w-full bg-slate-50 dark:bg-[#050b17] rounded-2xl border border-slate-200/90 dark:border-slate-800/90 p-2 sm:p-3 overflow-hidden relative shadow-inner transition-colors duration-200">
+        {/* Top-Right In-Canvas HUD Telemetry Badge */}
+        <div className="absolute top-4 right-4 z-10 hidden sm:flex items-center gap-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-200/80 dark:border-slate-800 text-[10px] font-mono text-slate-600 dark:text-slate-400">
+          <span>MESH: {zones.length}/5 ONLINE</span>
+          <span className="text-slate-300 dark:text-slate-700">•</span>
+          <span>ELEV: ~420m AGL</span>
+        </div>
+
         <svg
-          viewBox="0 0 600 320"
+          viewBox="0 0 620 330"
           aria-hidden="true"
           role="presentation"
-          className="w-full h-auto max-h-[340px] select-none"
+          className="w-full h-auto max-h-[350px] select-none"
         >
           <defs>
-            <linearGradient id="smogGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor={isDark ? '#0b162c' : '#e2e8f0'} stopOpacity={isDark ? '0.7' : '0.6'} />
-              <stop offset="100%" stopColor={isDark ? '#040812' : '#f8fafc'} stopOpacity={isDark ? '0.95' : '0.9'} />
+            {/* Background Map Gradient */}
+            <linearGradient id={`${instanceId}-mapGrad`} x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor={isDark ? '#081226' : '#f8fafc'} stopOpacity={isDark ? '0.9' : '0.8'} />
+              <stop offset="100%" stopColor={isDark ? '#040710' : '#f1f5f9'} stopOpacity="1" />
             </linearGradient>
 
-            <pattern id="inversionPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+            {/* Fine Geospatial Grid Pattern */}
+            <pattern id={`${instanceId}-geoGrid`} width="25" height="25" patternUnits="userSpaceOnUse">
               <path
-                d="M 0,20 l 20,-20 M -5,5 l 10,-10 M 15,25 l 10,-10"
-                stroke={isDark ? '#f59e0b' : '#d97706'}
+                d="M 25 0 L 0 0 0 25"
+                fill="none"
+                stroke={isDark ? '#1e293b' : '#e2e8f0'}
                 strokeWidth="0.5"
-                strokeOpacity={isDark ? '0.08' : '0.1'}
+                strokeOpacity={isDark ? '0.5' : '0.8'}
               />
             </pattern>
+
+            {/* Atmospheric Dispersion Heatmap Plumes for Each Zone */}
+            {zones.map((zone) => {
+              const color = getAQIColor(zone.aqi);
+              const maxOpacity = zone.aqi > 250 ? 0.35 : zone.aqi > 150 ? 0.25 : 0.16;
+
+              return (
+                <radialGradient
+                  key={`heat-grad-${zone.zoneId}`}
+                  id={`${instanceId}-heat-${zone.zoneId}`}
+                  cx="50%"
+                  cy="50%"
+                  r="50%"
+                >
+                  <stop offset="0%" stopColor={color} stopOpacity={maxOpacity} />
+                  <stop offset="45%" stopColor={color} stopOpacity={maxOpacity * 0.45} />
+                  <stop offset="85%" stopColor={color} stopOpacity={maxOpacity * 0.12} />
+                  <stop offset="100%" stopColor={color} stopOpacity="0" />
+                </radialGradient>
+              );
+            })}
           </defs>
 
-          {/* Background Canvas */}
-          <rect x="0" y="0" width="600" height="320" fill="url(#smogGrad)" rx="14" />
-          <rect x="0" y="0" width="600" height="320" fill="url(#inversionPattern)" rx="14" />
+          {/* Background Technical Surface */}
+          <rect x="0" y="0" width="620" height="330" fill={`url(#${instanceId}-mapGrad)`} rx="14" />
+          <rect x="0" y="0" width="620" height="330" fill={`url(#${instanceId}-geoGrid)`} rx="14" />
 
-          {/* Radar Elevation Rings */}
-          <circle cx="300" cy="160" r="80" fill="none" stroke={isDark ? '#1e293b' : '#cbd5e1'} strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />
-          <circle cx="300" cy="160" r="140" fill="none" stroke={isDark ? '#1e293b' : '#cbd5e1'} strokeWidth="1" strokeDasharray="4 4" opacity="0.4" />
-          <circle cx="300" cy="160" r="200" fill="none" stroke={isDark ? '#1e293b' : '#cbd5e1'} strokeWidth="0.7" strokeDasharray="5 5" opacity="0.25" />
+          {/* Geospatial Radar Range Elevation Rings (Centered at Urban Core: 310, 155) */}
+          <circle cx="310" cy="155" r="75" fill="none" stroke={isDark ? '#1e293b' : '#cbd5e1'} strokeWidth="0.8" strokeDasharray="3 3" opacity="0.6" />
+          <circle cx="310" cy="155" r="145" fill="none" stroke={isDark ? '#1e293b' : '#cbd5e1'} strokeWidth="0.8" strokeDasharray="4 4" opacity="0.4" />
+          <circle cx="310" cy="155" r="215" fill="none" stroke={isDark ? '#1e293b' : '#cbd5e1'} strokeWidth="0.6" strokeDasharray="5 5" opacity="0.25" />
 
-          {/* Grid lines */}
-          {[60, 120, 180, 240].map((y) => (
-            <line
-              key={`grid-h-${y}`}
-              x1="20"
-              y1={y}
-              x2="580"
-              y2={y}
-              stroke={isDark ? '#1e293b' : '#cbd5e1'}
-              strokeWidth="0.5"
-              strokeDasharray="4 4"
-              opacity="0.5"
-            />
-          ))}
-          {[120, 240, 360, 480].map((x) => (
-            <line
-              key={`grid-v-${x}`}
-              x1={x}
-              y1="20"
-              x2={x}
-              y2="300"
-              stroke={isDark ? '#1e293b' : '#cbd5e1'}
-              strokeWidth="0.5"
-              strokeDasharray="4 4"
-              opacity="0.5"
-            />
-          ))}
+          {/* Center Coordinate Crosshairs */}
+          <line x1="300" y1="155" x2="320" y2="155" stroke={isDark ? '#38bdf8' : '#0284c7'} strokeWidth="0.8" opacity="0.5" />
+          <line x1="310" y1="145" x2="310" y2="165" stroke={isDark ? '#38bdf8' : '#0284c7'} strokeWidth="0.8" opacity="0.5" />
+
+          {/* Radar Radial Distance Markers */}
+          <text x="314" y="85" fill={isDark ? '#475569' : '#94a3b8'} fontSize="8" fontFamily="monospace" opacity="0.8">2.5 KM</text>
+          <text x="314" y="25" fill={isDark ? '#475569' : '#94a3b8'} fontSize="8" fontFamily="monospace" opacity="0.6">5.0 KM</text>
+
+          {/* Coordinate Axis Labels along edges */}
+          <text x="20" y="20" fill={isDark ? '#475569' : '#94a3b8'} fontSize="8" fontFamily="monospace">28°42&apos;N / 77°06&apos;E</text>
+          <text x="530" y="320" fill={isDark ? '#475569' : '#94a3b8'} fontSize="8" fontFamily="monospace">28°32&apos;N / 77°22&apos;E</text>
+
+          {/* Authentic Atmospheric Dispersion Heat Plumes */}
+          {zones.map((zone, idx) => {
+            const pos = ZONE_GEO_MAP[zone.zoneId] || FALLBACK_POSITIONS[idx] || { cx: 200, cy: 150 };
+            const plumeRadius = Math.max(55, Math.min(105, zone.aqi * 0.28));
+
+            return (
+              <g key={`plume-group-${zone.zoneId}`} pointerEvents="none">
+                <ellipse
+                  cx={pos.cx}
+                  cy={pos.cy}
+                  rx={plumeRadius * 1.15}
+                  ry={plumeRadius * 0.9}
+                  fill={`url(#${instanceId}-heat-${zone.zoneId})`}
+                />
+                {/* Secondary Isopleth Contour Ring */}
+                {zone.aqi > 150 && (
+                  <ellipse
+                    cx={pos.cx}
+                    cy={pos.cy}
+                    rx={plumeRadius * 0.75}
+                    ry={plumeRadius * 0.6}
+                    fill="none"
+                    stroke={getAQIColor(zone.aqi)}
+                    strokeWidth="0.75"
+                    strokeDasharray="4 3"
+                    opacity="0.35"
+                  />
+                )}
+              </g>
+            );
+          })}
 
           {/* Inter-Sector Atmospheric Dispersion Corridors */}
-          <g stroke={isDark ? '#334155' : '#94a3b8'} strokeWidth="1.5" strokeDasharray="6 4" opacity="0.4">
-            <line x1="160" y1="75" x2="300" y2="160" />
-            <line x1="300" y1="160" x2="450" y2="90" />
-            <line x1="300" y1="160" x2="460" y2="235" />
-            <line x1="170" y1="230" x2="300" y2="160" />
-            <line x1="170" y1="230" x2="160" y2="75" />
+          <g stroke={isDark ? '#334155' : '#cbd5e1'} strokeWidth="1" strokeDasharray="5 5" opacity="0.45">
+            <line x1="145" y1="85" x2="310" y2="155" />
+            <line x1="310" y1="155" x2="465" y2="95" />
+            <line x1="310" y1="155" x2="475" y2="235" />
+            <line x1="155" y1="230" x2="310" y2="155" />
+            <line x1="155" y1="230" x2="145" y2="85" />
+            <line x1="465" y1="95" x2="475" y2="235" />
           </g>
 
-          {/* Wind Streamlines */}
+          {/* Aerodynamic Wind Streamline Vectors (NW to SE prevailing drift) */}
           <g stroke={isDark ? '#38bdf8' : '#0284c7'} strokeWidth="1" opacity="0.3">
-            <path d="M 50 40 Q 150 20 250 50 T 450 40" fill="none" strokeDasharray="5 5" />
-            <path d="M 100 160 Q 250 140 380 170 T 550 150" fill="none" strokeDasharray="5 5" />
-            <path d="M 80 270 Q 220 250 360 280 T 520 260" fill="none" strokeDasharray="5 5" />
+            <path d="M 40 45 Q 160 25 280 55 T 520 45" fill="none" strokeDasharray="6 6" />
+            <path d="M 60 170 Q 220 145 360 175 T 570 160" fill="none" strokeDasharray="6 6" />
+            <path d="M 70 280 Q 200 255 350 285 T 550 270" fill="none" strokeDasharray="6 6" />
           </g>
 
-          {/* Telemetry Sensor Nodes */}
+          {/* Directional Wind Flow Chevrons */}
+          <g fill={isDark ? '#38bdf8' : '#0284c7'} opacity="0.35">
+            <polygon points="280,53 274,50 274,56" />
+            <polygon points="360,173 354,170 354,176" />
+            <polygon points="350,283 344,280 344,286" />
+          </g>
+
+          {/* Interactive Telemetry Sensor Nodes */}
           {zones.map((zone, idx) => {
-            const pos = NODE_COORDINATES[idx] || { cx: 200 + idx * 60, cy: 150 };
+            const pos = ZONE_GEO_MAP[zone.zoneId] || FALLBACK_POSITIONS[idx] || { cx: 200 + idx * 70, cy: 150 };
             const color = getAQIColor(zone.aqi);
             const isSelected = zone.zoneId === selectedZoneId;
+            const geoInfo = ZONE_GEO_MAP[zone.zoneId] || FALLBACK_POSITIONS[idx];
 
             return (
               <g
                 key={zone.zoneId}
-                className="cursor-pointer transition-transform duration-200"
+                tabIndex={0}
+                role="button"
+                aria-label={`Select sector ${zone.zoneName}, AQI ${zone.aqi}, Category ${zone.category}`}
                 onClick={() => onSelectZone(zone.zoneId)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onSelectZone(zone.zoneId);
+                  }
+                }}
+                className="cursor-pointer focus:outline-none group transition-transform duration-150"
               >
-                {/* Smog Inversion Spike Hazard Warning Glow */}
+                {/* Active Hazardous Smog Inversion Ping Ring */}
                 {zone.aqi > 200 && (
                   <circle
                     cx={pos.cx}
                     cy={pos.cy}
-                    r="34"
+                    r="32"
                     fill="none"
                     stroke={color}
                     strokeWidth="1.5"
-                    opacity="0.35"
+                    opacity="0.4"
                     className="animate-ping"
                   />
                 )}
 
-                {/* Selected Sector Target Ring */}
+                {/* Selected Sector Precision Targeting Reticle */}
                 {isSelected && (
-                  <>
+                  <g>
                     <circle
                       cx={pos.cx}
                       cy={pos.cy}
-                      r="32"
+                      r="30"
                       fill="none"
                       stroke="#10b981"
                       strokeWidth="2"
                       strokeDasharray="4 2"
-                      opacity="0.8"
+                      opacity="0.85"
                     />
-                    <circle
-                      cx={pos.cx}
-                      cy={pos.cy}
-                      r="36"
+                    {/* Corner Reticle Brackets */}
+                    <path
+                      d={`M ${pos.cx - 24} ${pos.cy - 12} L ${pos.cx - 24} ${pos.cy - 24} L ${pos.cx - 12} ${pos.cy - 24}`}
                       fill="none"
-                      stroke="#34d399"
-                      strokeWidth="0.8"
-                      opacity="0.4"
+                      stroke="#10b981"
+                      strokeWidth="1.5"
                     />
-                  </>
+                    <path
+                      d={`M ${pos.cx + 24} ${pos.cy - 12} L ${pos.cx + 24} ${pos.cy - 24} L ${pos.cx + 12} ${pos.cy - 24}`}
+                      fill="none"
+                      stroke="#10b981"
+                      strokeWidth="1.5"
+                    />
+                    <path
+                      d={`M ${pos.cx - 24} ${pos.cy + 12} L ${pos.cx - 24} ${pos.cy + 24} L ${pos.cx - 12} ${pos.cy + 24}`}
+                      fill="none"
+                      stroke="#10b981"
+                      strokeWidth="1.5"
+                    />
+                    <path
+                      d={`M ${pos.cx + 24} ${pos.cy + 12} L ${pos.cx + 24} ${pos.cy + 24} L ${pos.cx + 12} ${pos.cy + 24}`}
+                      fill="none"
+                      stroke="#10b981"
+                      strokeWidth="1.5"
+                    />
+                  </g>
                 )}
 
-                {/* Ambient Soft Glow Behind Node */}
+                {/* Crisp Sensor Housing Disc (Solid surface, zero artificial blur) */}
                 <circle
                   cx={pos.cx}
                   cy={pos.cy}
-                  r="24"
-                  fill={color}
-                  opacity="0.18"
-                />
-
-                {/* Node Housing Disc */}
-                <circle
-                  cx={pos.cx}
-                  cy={pos.cy}
-                  r="22"
-                  fill={isDark ? '#0b1324' : '#ffffff'}
+                  r="21"
+                  fill={isDark ? '#0c1527' : '#ffffff'}
                   stroke={color}
-                  strokeWidth="2.5"
-                  className="shadow-md"
+                  strokeWidth={isSelected ? 3 : 2}
+                  className="filter drop-shadow-sm transition-all duration-150 group-hover:scale-105"
                 />
 
-                {/* AQI Numeric Readout */}
+                {/* Inversion Alert Dot on Sensor Node */}
+                {zone.inversionRisk && (
+                  <circle
+                    cx={pos.cx + 14}
+                    cy={pos.cy - 14}
+                    r="4"
+                    fill="#f59e0b"
+                    stroke={isDark ? '#0c1527' : '#ffffff'}
+                    strokeWidth="1.5"
+                  />
+                )}
+
+                {/* Numeric AQI Readout */}
                 <text
                   x={pos.cx}
-                  y={pos.cy + 4}
+                  y={pos.cy + 4.5}
                   textAnchor="middle"
-                  fill={isDark ? '#ffffff' : '#0f172a'}
-                  fontSize="12"
-                  fontWeight="800"
-                  fontFamily="JetBrains Mono, monospace"
+                  fill={isDark ? '#f8fafc' : '#0f172a'}
+                  fontSize="12.5"
+                  fontWeight="900"
+                  fontFamily="JetBrains Mono, ui-monospace, monospace"
                 >
                   {zone.aqi}
                 </text>
 
-                {/* Sector Label Badge */}
-                <rect
-                  x={pos.cx - 50}
-                  y={pos.cy + 25}
-                  width="100"
-                  height="16"
-                  rx="4"
-                  fill={isDark ? '#060b14' : '#ffffff'}
-                  stroke={isSelected ? '#10b981' : isDark ? '#1e293b' : '#cbd5e1'}
-                  strokeWidth="0.75"
-                  opacity="0.95"
-                />
-                <text
-                  x={pos.cx}
-                  y={pos.cy + 37}
-                  textAnchor="middle"
-                  fill={isSelected ? '#059669' : isDark ? '#cbd5e1' : '#334155'}
-                  fontSize="9.5"
-                  fontWeight="700"
-                  letterSpacing="0.2px"
-                >
-                  {zone.zoneName}
-                </text>
+                {/* Sector Callout Capsule */}
+                <g className="transition-opacity duration-150">
+                  <rect
+                    x={pos.cx - 52}
+                    y={pos.cy + 26}
+                    width="104"
+                    height="20"
+                    rx="6"
+                    fill={isDark ? '#070f1e' : '#ffffff'}
+                    stroke={isSelected ? '#10b981' : isDark ? '#1e293b' : '#cbd5e1'}
+                    strokeWidth={isSelected ? 1.5 : 1}
+                    className="shadow-sm"
+                  />
+                  <text
+                    x={pos.cx}
+                    y={pos.cy + 40}
+                    textAnchor="middle"
+                    fill={isSelected ? (isDark ? '#34d399' : '#059669') : isDark ? '#cbd5e1' : '#334155'}
+                    fontSize="9.5"
+                    fontWeight="700"
+                    letterSpacing="0.2px"
+                  >
+                    {geoInfo?.code || 'SECT'}: {geoInfo?.shortLabel || zone.zoneName}
+                  </text>
+                </g>
               </g>
             );
           })}
         </svg>
       </div>
 
-      <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 px-1">
-        <span>Click any telemetry sensor node to switch hyperlocal sector.</span>
-        <span className="font-mono text-emerald-600 dark:text-emerald-400">Boundary Cap: ~420m AGL</span>
+      {/* Footer Spatial Status Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 px-1 gap-2 border-t border-slate-200/70 dark:border-slate-800/70 pt-3">
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+          <span>Click any sensor node or sector card to focus hyperlocal telemetry.</span>
+        </div>
+        <div className="flex items-center gap-3 font-mono text-[10px]">
+          <span>
+            FOCUSED:{' '}
+            <strong className="text-slate-900 dark:text-slate-200">{selectedZone.zoneName}</strong>
+          </span>
+          <span className="text-emerald-600 dark:text-emerald-400 font-bold">
+            PM2.5: {selectedZone.pm25} µg/m³
+          </span>
+        </div>
       </div>
     </div>
   );

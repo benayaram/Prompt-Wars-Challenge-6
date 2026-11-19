@@ -1,6 +1,7 @@
 // ============================================================
 // src/components/ui/Badge.tsx
-// Status Pill & Metric Badge Component
+// Status Pill & Metric Badge Component (Linear/Stripe Craftsmanship)
+// Dual-Theme Support (Light & Dark) with WCAG AA Compliant Contrast
 // ============================================================
 
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -29,48 +30,44 @@ export function Badge({
   children,
   ...props
 }: BadgeProps) {
-  const variantStyles: Record<BadgeVariant, { bg: string; text: string; border: string; dot: string }> = {
+  const variantStyles: Record<
+    BadgeVariant,
+    { classes: string; dot: string }
+  > = {
     emerald: {
-      bg: 'bg-emerald-950/70',
-      text: 'text-emerald-300',
-      border: 'border-emerald-500/40',
-      dot: 'bg-emerald-400',
+      classes:
+        'bg-emerald-50 text-emerald-800 border-emerald-200/90 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-500/30',
+      dot: 'bg-emerald-500 dark:bg-emerald-400',
     },
     cyan: {
-      bg: 'bg-cyan-950/70',
-      text: 'text-cyan-300',
-      border: 'border-cyan-500/40',
-      dot: 'bg-cyan-400',
+      classes:
+        'bg-sky-50 text-sky-800 border-sky-200/90 dark:bg-sky-950/60 dark:text-sky-300 dark:border-sky-500/30',
+      dot: 'bg-sky-500 dark:bg-sky-400',
     },
     amber: {
-      bg: 'bg-amber-950/70',
-      text: 'text-amber-300',
-      border: 'border-amber-500/40',
-      dot: 'bg-amber-400',
+      classes:
+        'bg-amber-50 text-amber-900 border-amber-200/90 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-500/30',
+      dot: 'bg-amber-500 dark:bg-amber-400',
     },
     rose: {
-      bg: 'bg-rose-950/70',
-      text: 'text-rose-300',
-      border: 'border-rose-500/40',
-      dot: 'bg-rose-400',
+      classes:
+        'bg-rose-50 text-rose-900 border-rose-200/90 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-500/30',
+      dot: 'bg-rose-500 dark:bg-rose-400',
     },
     violet: {
-      bg: 'bg-violet-950/70',
-      text: 'text-violet-300',
-      border: 'border-violet-500/40',
-      dot: 'bg-violet-400',
+      classes:
+        'bg-violet-50 text-violet-900 border-violet-200/90 dark:bg-violet-950/60 dark:text-violet-300 dark:border-violet-500/30',
+      dot: 'bg-violet-500 dark:bg-violet-400',
     },
     slate: {
-      bg: 'bg-slate-800/80',
-      text: 'text-slate-300',
-      border: 'border-slate-700/60',
-      dot: 'bg-slate-400',
+      classes:
+        'bg-slate-100 text-slate-800 border-slate-200 dark:bg-slate-800/80 dark:text-slate-300 dark:border-slate-700/60',
+      dot: 'bg-slate-500 dark:bg-slate-400',
     },
     outline: {
-      bg: 'bg-transparent',
-      text: 'text-slate-300',
-      border: 'border-slate-700',
-      dot: 'bg-slate-400',
+      classes:
+        'bg-transparent text-slate-700 border-slate-300 dark:text-slate-300 dark:border-slate-700',
+      dot: 'bg-slate-500 dark:bg-slate-400',
     },
   };
 
@@ -78,7 +75,7 @@ export function Badge({
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-tight border ${current.bg} ${current.text} ${current.border} ${className}`}
+      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold tracking-tight border shadow-2xs ${current.classes} ${className}`}
       {...props}
     >
       {hasDot && (

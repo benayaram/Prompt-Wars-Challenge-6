@@ -1,53 +1,68 @@
 @import "tailwindcss";
 
 /* ============================================================
-   BreatheWay — Dual Theme Engine (Light Theme by Default)
-   Warm & community-friendly safe passage through polluted cities
+   BreatheWay — Precision Design System (Linear & Stripe Craftsmanship)
+   Dual Theme Engine (Light Theme by Default, Dark Theme Optimized)
    WCAG 2.2 Level AA Compliant
    ============================================================ */
 
 :root {
-  /* LIGHT THEME (Default) */
+  /* ------------------------------------------------------------
+     LIGHT THEME (Default) — Crisp, Clean, High-Contrast Precision
+     ------------------------------------------------------------ */
   --bg-base: #f8fafc;
   --bg-surface: #ffffff;
   --bg-surface-elevated: #ffffff;
-  --bg-surface-glass: rgba(255, 255, 255, 0.94);
+  --bg-surface-glass: rgba(255, 255, 255, 0.92);
   --bg-surface-soft: #f1f5f9;
+  --bg-surface-subtle: #f8fafc;
+  --bg-surface-hover: #f1f5f9;
 
+  /* Borders: Hairline precision with crisp delineation */
   --border-subtle: rgba(15, 23, 42, 0.08);
-  --border-medium: rgba(15, 23, 42, 0.14);
-  --border-strong: rgba(15, 23, 42, 0.25);
-  --border-primary: rgba(16, 185, 129, 0.45);
-  --border-cyan: rgba(14, 165, 233, 0.45);
+  --border-medium: rgba(15, 23, 42, 0.12);
+  --border-strong: rgba(15, 23, 42, 0.20);
+  --border-primary: rgba(5, 150, 105, 0.35);
+  --border-cyan: rgba(2, 132, 199, 0.35);
 
+  /* Primary Brand (Clean Air Emerald) */
   --primary: #059669;
   --primary-light: #10b981;
   --primary-hover: #047857;
   --primary-active: #065f46;
-  --primary-glow: rgba(16, 185, 129, 0.18);
+  --primary-subtle: #ecfdf5;
+  --primary-fg: #ffffff;
+  --primary-glow: rgba(5, 150, 105, 0.12);
 
+  /* Secondary & Accents */
   --secondary: #0284c7;
-  --secondary-glow: rgba(14, 165, 233, 0.18);
-
+  --secondary-glow: rgba(2, 132, 199, 0.12);
   --accent-cyan: #0891b2;
   --accent-teal: #0d9488;
   --accent-violet: #7c3aed;
+  --accent-amber: #d97706;
 
+  /* Semantic Status (EPA Standardized AQI Breakpoints) */
   --status-good: #059669;
   --status-moderate: #d97706;
   --status-unhealthy: #ea580c;
   --status-hazardous: #dc2626;
   --status-critical: #991b1b;
 
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
-  --text-subdued: #94a3b8;
+  /* Typography: High-contrast Slate hierarchy */
+  --text-primary: #0f172a;       /* Slate 900 — 15:1 contrast against white */
+  --text-secondary: #334155;     /* Slate 700 — 8.5:1 contrast */
+  --text-muted: #64748b;         /* Slate 500 — 4.6:1 contrast (WCAG AA pass) */
+  --text-subdued: #94a3b8;       /* Slate 400 */
 
-  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
-  --shadow-elevated: 0 20px 40px -15px rgba(0, 0, 0, 0.12), 0 0 1px 1px rgba(0, 0, 0, 0.04);
+  /* Shadows: Multi-layer Stripe-style elevation without fuzzy blur */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(15, 23, 42, 0.06);
+  --shadow-elevated: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(15, 23, 42, 0.08);
+  --shadow-interactive: 0 4px 12px -2px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(5, 150, 105, 0.3);
 
-  /* Compatibility Tokens */
+  /* Compatibility & Legacy Tokens */
   --stadium-bg: #f8fafc;
   --stadium-surface: #ffffff;
   --stadium-green: #059669;
@@ -56,74 +71,103 @@
   --stadium-red: #dc2626;
 }
 
-/* DARK THEME */
+/* ------------------------------------------------------------
+   DARK THEME — Deep Obsidian Slate, Razor-Sharp Edge Definition
+   ------------------------------------------------------------ */
 :root[data-theme="dark"],
 .dark {
-  --bg-base: #060b14;
-  --bg-surface: #0b1324;
-  --bg-surface-elevated: #111d36;
-  --bg-surface-glass: rgba(11, 19, 36, 0.85);
-  --bg-surface-soft: #0e172a;
+  --bg-base: #080c14;
+  --bg-surface: #0f172a;
+  --bg-surface-elevated: #131d31;
+  --bg-surface-glass: rgba(15, 23, 42, 0.88);
+  --bg-surface-soft: #141e33;
+  --bg-surface-subtle: #0d1527;
+  --bg-surface-hover: #1e293b;
 
-  --border-subtle: rgba(148, 163, 184, 0.12);
-  --border-medium: rgba(148, 163, 184, 0.22);
-  --border-strong: rgba(148, 163, 184, 0.35);
-  --border-primary: rgba(16, 185, 129, 0.45);
-  --border-cyan: rgba(14, 165, 233, 0.45);
+  /* Hairline borders with light-catching top inset */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --border-primary: rgba(16, 185, 129, 0.35);
+  --border-cyan: rgba(14, 165, 233, 0.35);
 
+  /* Primary Brand (Clean Air Emerald) */
   --primary: #10b981;
   --primary-light: #34d399;
   --primary-hover: #059669;
   --primary-active: #047857;
-  --primary-glow: rgba(16, 185, 129, 0.25);
+  --primary-subtle: rgba(16, 185, 129, 0.12);
+  --primary-fg: #022c22;
+  --primary-glow: rgba(16, 185, 129, 0.18);
 
+  /* Secondary & Accents */
   --secondary: #0ea5e9;
-  --secondary-glow: rgba(14, 165, 233, 0.25);
-
+  --secondary-glow: rgba(14, 165, 233, 0.18);
   --accent-cyan: #06b6d4;
   --accent-teal: #14b8a6;
   --accent-violet: #8b5cf6;
+  --accent-amber: #f59e0b;
 
+  /* Semantic Status */
   --status-good: #10b981;
   --status-moderate: #f59e0b;
   --status-unhealthy: #f97316;
   --status-hazardous: #ef4444;
-  --status-critical: #991b1b;
+  --status-critical: #dc2626;
 
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  --text-subdued: #64748b;
+  /* Typography */
+  --text-primary: #f8fafc;       /* Slate 50 — 15.5:1 contrast against base */
+  --text-secondary: #cbd5e1;     /* Slate 300 — 9.5:1 contrast */
+  --text-muted: #94a3b8;         /* Slate 400 — 5.2:1 contrast */
+  --text-subdued: #64748b;       /* Slate 500 */
 
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.03) inset;
-  --shadow-elevated: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(255, 255, 255, 0.05) inset;
+  /* Shadows: Linear-style deep shadows with light-catching hairline insets */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-elevated: 0 14px 34px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --shadow-interactive: 0 8px 24px -4px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(16, 185, 129, 0.35);
 
-  --stadium-bg: #060b14;
-  --stadium-surface: #0b1324;
+  --stadium-bg: #080c14;
+  --stadium-surface: #0f172a;
   --stadium-green: #10b981;
   --stadium-blue: #0ea5e9;
   --stadium-gold: #f59e0b;
   --stadium-red: #ef4444;
 }
 
+/* ------------------------------------------------------------
+   HIGH CONTRAST MODE (Accessibility Enhancement)
+   ------------------------------------------------------------ */
+:root[data-contrast="high"],
+.contrast-125 {
+  --border-subtle: rgba(15, 23, 42, 0.25);
+  --border-medium: rgba(15, 23, 42, 0.35);
+  --border-strong: rgba(15, 23, 42, 0.50);
+  --text-muted: #334155;
+}
+
+:root[data-theme="dark"][data-contrast="high"],
+.dark.contrast-125,
+.dark .contrast-125 {
+  --border-subtle: rgba(255, 255, 255, 0.22);
+  --border-medium: rgba(255, 255, 255, 0.35);
+  --border-strong: rgba(255, 255, 255, 0.55);
+  --text-muted: #cbd5e1;
+}
+
+/* ------------------------------------------------------------
+   Base Document Styles — Clean Canvas, Zero AI Slop Blobs
+   ------------------------------------------------------------ */
 body {
   background-color: var(--bg-base);
   color: var(--text-primary);
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.011em;
   overflow-x: hidden;
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.06), transparent),
-    radial-gradient(ellipse 60% 40% at 85% 10%, rgba(14, 165, 233, 0.05), transparent);
-  background-attachment: fixed;
-  transition: background-color 0.25s ease, color 0.25s ease;
-}
-
-:root[data-theme="dark"] body,
-.dark body {
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.12), transparent),
-    radial-gradient(ellipse 60% 40% at 85% 10%, rgba(14, 165, 233, 0.08), transparent),
-    radial-gradient(ellipse 50% 30% at 10% 40%, rgba(139, 92, 246, 0.04), transparent);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* WCAG 2.4.7 Focus Visible Indicator */
@@ -133,45 +177,46 @@ body {
   border-radius: 6px;
 }
 
-/* Refined Glassmorphic & Clean Light Panels */
+/* ------------------------------------------------------------
+   Precision Surface Panels (Linear & Stripe Craftsmanship)
+   ------------------------------------------------------------ */
 .glass-panel {
   background: var(--bg-surface-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-card);
-  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .glass-panel-elevated {
   background: var(--bg-surface-elevated);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-medium);
   box-shadow: var(--shadow-elevated);
-  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .glass-panel-interactive {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel-interactive:hover {
-  border-color: rgba(16, 185, 129, 0.4);
-  box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.08), 0 0 20px -5px rgba(16, 185, 129, 0.15);
+  border-color: var(--border-primary);
+  box-shadow: var(--shadow-interactive);
   transform: translateY(-1px);
 }
 
-:root[data-theme="dark"] .glass-panel-interactive:hover,
-.dark .glass-panel-interactive:hover {
-  box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.6), 0 0 20px -5px rgba(16, 185, 129, 0.15);
-}
-
-/* Shimmer & Animations */
+/* ------------------------------------------------------------
+   Micro-Animations & Transitions
+   ------------------------------------------------------------ */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
@@ -180,7 +225,7 @@ body {
 }
 
 .fade-in {
-  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes shimmer {
@@ -193,16 +238,19 @@ body {
 }
 
 .skeleton-shimmer {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.03) 25%, rgba(0, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0.03) 75%);
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.04) 25%, rgba(15, 23, 42, 0.08) 50%, rgba(15, 23, 42, 0.04) 75%);
   background-size: 200% 100%;
-  animation: shimmer 1.8s infinite;
+  animation: shimmer 1.6s infinite;
 }
 
 :root[data-theme="dark"] .skeleton-shimmer,
 .dark .skeleton-shimmer {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 75%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.07) 50%, rgba(255, 255, 255, 0.03) 75%);
 }
 
+/* ------------------------------------------------------------
+   Typography Utilities
+   ------------------------------------------------------------ */
 .font-arabic {
   font-family: 'Noto Sans Arabic', Tahoma, sans-serif;
 }
@@ -210,16 +258,19 @@ body {
 .font-mono-numbers {
   font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-feature-settings: 'tnum' 1, 'zero' 1;
+  font-variant-numeric: tabular-nums;
 }
 
-/* Custom Sleek Scrollbar */
+/* ------------------------------------------------------------
+   Custom Sleek Scrollbar
+   ------------------------------------------------------------ */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-base);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -228,10 +279,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
+  background: var(--text-subdued);
 }
 
-/* Custom Sleek Range Sliders */
+/* ------------------------------------------------------------
+   Custom Precision Range Slider
+   ------------------------------------------------------------ */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -239,6 +292,7 @@ input[type="range"] {
   height: 6px;
   border-radius: 9999px;
   outline: none;
+  transition: background 0.15s ease;
 }
 
 :root[data-theme="dark"] input[type="range"],
@@ -249,17 +303,21 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: #10b981;
+  background: var(--primary);
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   border: 2px solid #ffffff;
-  transition: transform 0.15s ease;
+  transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-  background: #059669;
+  transform: scale(1.12);
+  background: var(--primary-hover);
+}
+
+input[type="range"]:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px var(--primary-subtle);
 }

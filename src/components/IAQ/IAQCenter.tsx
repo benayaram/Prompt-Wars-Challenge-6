@@ -1,7 +1,7 @@
 // ============================================================
 // src/components/IAQ/IAQCenter.tsx
 // Indoor Air Quality (IAQ) & CADR Architecture (Dual Theme)
-// Per PROBLEM_ALIGNMENT.md §1.4 & EFFICIENCY.md §2
+// Senior Craftsmanship SaaS Design (Light & Dark WCAG AA Compliant)
 // ============================================================
 
 import { memo, useState, useMemo, useCallback } from 'react';
@@ -13,7 +13,11 @@ import {
 } from '@/lib/aqiCompute';
 import { WindowSchedule } from './WindowSchedule';
 import { DIYHackGrid } from './DIYHackGrid';
-import { IAQIcon, SparklesIcon, AlertTriangleIcon } from '@/components/ui/Icons';
+import {
+  IAQIcon,
+  SparklesIcon,
+  AlertTriangleIcon,
+} from '@/components/ui/Icons';
 
 export const IAQCenter = memo(function IAQCenter() {
   const { rooms, updateRoom, selectedZone } = useAppContext();
@@ -63,27 +67,33 @@ export const IAQCenter = memo(function IAQCenter() {
   );
 
   return (
-    <section aria-label="Indoor Air Quality and Low-Cost Hack Center" className="flex flex-col gap-8 fade-in">
+    <section
+      aria-label="Indoor Air Quality and Low-Cost Hack Center"
+      className="flex flex-col gap-8 fade-in"
+    >
       {/* CADR Calculator & Room Profile Header */}
-      <div className="glass-panel-elevated rounded-3xl p-6 sm:p-8 flex flex-col gap-6">
+      <div className="glass-panel-elevated rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col gap-6">
         <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/40 flex items-center gap-1">
-              <SparklesIcon size={12} className="text-emerald-600 dark:text-emerald-400" />
+          <div className="flex items-center gap-2 mb-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold font-mono tracking-wide bg-emerald-50 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/80">
+              <SparklesIcon size={13} className="text-emerald-600 dark:text-emerald-400" />
               ROOM MASS BALANCE ENGINE
             </span>
           </div>
-          <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
-            <IAQIcon size={24} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight flex items-center gap-3">
+            <div className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/80 text-emerald-600 dark:text-emerald-400">
+              <IAQIcon size={22} />
+            </div>
             <span>Room CADR & Indoor Air Quality (IAQ) Calculator</span>
           </h2>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-2xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1.5 max-w-2xl leading-relaxed">
             Calculate Clean Air Delivery Rate (CADR) requirements, air changes per hour (ACH), and purification duration.
           </p>
         </div>
 
         {/* Room Tab Selection Pills */}
-        <div className="flex flex-wrap gap-2.5">
+        <div className="flex flex-wrap gap-2.5 pt-2 border-t border-slate-200 dark:border-slate-800">
           {rooms.map((room) => {
             const isSelected = room.roomId === selectedRoomId;
             return (
@@ -92,10 +102,10 @@ export const IAQCenter = memo(function IAQCenter() {
                 type="button"
                 aria-pressed={isSelected}
                 onClick={() => setSelectedRoomId(room.roomId)}
-                className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-emerald-400 ${
+                className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
                   isSelected
-                    ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-500/20 border border-emerald-400/40'
-                    : 'bg-slate-100 dark:bg-slate-900/80 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
+                    ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-600/30 border border-emerald-500'
+                    : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700'
                 }`}
               >
                 {room.roomName}
@@ -106,13 +116,15 @@ export const IAQCenter = memo(function IAQCenter() {
 
         {/* Room Parameters & Diagnostic Sliders */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          <div className="lg:col-span-5 bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 flex flex-col justify-between gap-5">
-            <div className="flex flex-col gap-2">
+          {/* Sliders Console */}
+          <div className="lg:col-span-5 bg-slate-50/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between gap-6">
+            {/* Floor Area Slider */}
+            <div className="flex flex-col gap-2.5">
               <div className="flex justify-between items-center text-xs font-bold text-slate-700 dark:text-slate-300">
                 <label htmlFor="room-area-range" className="uppercase tracking-wider">
                   Floor Area:
                 </label>
-                <span className="text-emerald-700 dark:text-emerald-400 font-black font-mono text-sm px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-500/30">
+                <span className="text-emerald-800 dark:text-emerald-300 font-mono font-bold text-sm px-3 py-1 rounded-lg bg-emerald-100/90 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800/80">
                   {activeRoom.areaSqMeters} m²
                 </span>
               </div>
@@ -124,21 +136,22 @@ export const IAQCenter = memo(function IAQCenter() {
                 step="1"
                 value={activeRoom.areaSqMeters}
                 onChange={(e) => handleAreaChange(parseFloat(e.target.value))}
-                className="w-full mt-2"
+                className="w-full mt-2 cursor-pointer accent-emerald-600"
               />
-              <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+              <div className="flex justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono">
                 <span>6 m²</span>
                 <span>40 m²</span>
                 <span>80 m²</span>
               </div>
             </div>
 
-            <div className="flex flex-col gap-2 pt-4 border-t border-slate-200 dark:border-slate-800">
+            {/* CADR Slider */}
+            <div className="flex flex-col gap-2.5 pt-5 border-t border-slate-200 dark:border-slate-800">
               <div className="flex justify-between items-center text-xs font-bold text-slate-700 dark:text-slate-300">
                 <label htmlFor="room-cadr-range" className="uppercase tracking-wider">
                   Purifier Clean Air Delivery Rate (CADR):
                 </label>
-                <span className="text-emerald-700 dark:text-emerald-400 font-black font-mono text-sm px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-500/30">
+                <span className="text-emerald-800 dark:text-emerald-300 font-mono font-bold text-sm px-3 py-1 rounded-lg bg-emerald-100/90 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800/80">
                   {activeRoom.purifierCadrM3H} m³/h
                 </span>
               </div>
@@ -150,9 +163,9 @@ export const IAQCenter = memo(function IAQCenter() {
                 step="20"
                 value={activeRoom.purifierCadrM3H}
                 onChange={(e) => handleCadrChange(parseFloat(e.target.value))}
-                className="w-full mt-2"
+                className="w-full mt-2 cursor-pointer accent-emerald-600"
               />
-              <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+              <div className="flex justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono">
                 <span>0 m³/h (None)</span>
                 <span>300 m³/h</span>
                 <span>600 m³/h (Max)</span>
@@ -161,56 +174,66 @@ export const IAQCenter = memo(function IAQCenter() {
           </div>
 
           {/* Diagnostic Metrics Display */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-            <div className="glass-panel rounded-3xl p-5 flex flex-col justify-between">
-              <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                Target CADR (4 ACH)
-              </span>
-              <div className="text-3xl font-black text-slate-900 dark:text-white mt-2 font-mono">
-                {requiredCadrM3H} <span className="text-xs font-normal text-slate-500 dark:text-slate-400">m³/h</span>
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {/* Target CADR */}
+            <div className="glass-panel rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
+                  Target CADR (4 ACH)
+                </span>
+                <div className="text-3xl font-black text-slate-900 dark:text-slate-100 mt-2 font-mono tracking-tight">
+                  {requiredCadrM3H} <span className="text-xs font-normal text-slate-500 dark:text-slate-400">m³/h</span>
+                </div>
               </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+              <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
                 Volume: {roomVolumeM3} m³ ({activeRoom.ceilingHeightMeters}m ceiling).
               </p>
             </div>
 
-            <div className="glass-panel rounded-3xl p-5 flex flex-col justify-between">
-              <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                Effective Air Changes
-              </span>
-              <div className="text-3xl font-black text-emerald-600 dark:text-emerald-400 mt-2 font-mono">
-                {effectiveAch} <span className="text-xs font-normal text-slate-500 dark:text-slate-400">ACH</span>
+            {/* Effective ACH */}
+            <div className="glass-panel rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
+                  Effective Air Changes
+                </span>
+                <div className="text-3xl font-black text-emerald-700 dark:text-emerald-400 mt-2 font-mono tracking-tight">
+                  {effectiveAch} <span className="text-xs font-normal text-slate-500 dark:text-slate-400">ACH</span>
+                </div>
               </div>
-              <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+              <p className="text-[11px] text-slate-700 dark:text-slate-300 mt-3 leading-relaxed font-medium">
                 {effectiveAch >= 4
                   ? '✅ Meets hospital-grade clean room target.'
                   : '⚠️ Sub-optimal air recycling rate.'}
               </p>
             </div>
 
-            <div className="glass-panel rounded-3xl p-5 flex flex-col justify-between">
-              <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                80% Clean Time
-              </span>
-              <div className="text-3xl font-black text-sky-600 dark:text-cyan-400 mt-2 font-mono">
-                {purificationTimeMins > 120 ? 'No Purifier' : `${purificationTimeMins} mins`}
+            {/* 80% Clean Time */}
+            <div className="glass-panel rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
+                  80% Clean Time
+                </span>
+                <div className="text-3xl font-black text-sky-700 dark:text-sky-400 mt-2 font-mono tracking-tight">
+                  {purificationTimeMins > 120 ? 'No Purifier' : `${purificationTimeMins} mins`}
+                </div>
               </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+              <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
                 Time required to filter out airborne ambient particles.
               </p>
             </div>
           </div>
         </div>
 
+        {/* CADR Deficit Alert Banner */}
         {cadrDeficit > 0 && (
-          <div className="bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-500/50 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-amber-900 dark:text-amber-200">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-xl bg-amber-100 dark:bg-amber-900/60 border border-amber-300 dark:border-amber-500/40 text-amber-700 dark:text-amber-300 shrink-0">
+          <div className="bg-amber-50/90 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-amber-900 dark:text-amber-200">
+            <div className="flex items-center gap-3.5">
+              <div className="p-2 rounded-xl bg-amber-100 dark:bg-amber-900/60 border border-amber-300 dark:border-amber-700 text-amber-800 dark:text-amber-300 shrink-0">
                 <AlertTriangleIcon size={18} />
               </div>
-              <div>
-                <strong>CADR Deficit Detected:</strong> Your current setup is short by{' '}
-                <strong className="text-slate-900 dark:text-white font-mono">{cadrDeficit} m³/h</strong>. Build a low-cost
+              <div className="leading-relaxed">
+                <strong className="font-bold">CADR Deficit Detected:</strong> Your current setup is short by{' '}
+                <strong className="text-slate-900 dark:text-white font-mono font-bold">{cadrDeficit} m³/h</strong>. Build a low-cost{' '}
                 DIY Corsi-Rosenthal Box to achieve full 4 ACH protection!
               </div>
             </div>
