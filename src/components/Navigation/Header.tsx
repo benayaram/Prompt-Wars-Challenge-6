@@ -211,7 +211,7 @@ export const Header = memo(function Header() {
           {/* Quick Focused Sector Telemetry Module */}
           <div className="p-4 mx-3 my-3 rounded-2xl bg-slate-50/90 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-2xs flex flex-col gap-2.5">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black tracking-wider uppercase text-slate-400 dark:text-slate-500 font-mono">
+              <span className="text-[10px] font-black tracking-wider uppercase text-slate-600 dark:text-slate-400 font-mono">
                 ACTIVE TELEMETRY SECTOR
               </span>
               <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: aqiColor }} />
@@ -265,7 +265,7 @@ export const Header = memo(function Header() {
 
           {/* Primary Sidebar Vertical Tab Navigation */}
           <nav aria-label="Main application tabs" className="flex-1 px-3 py-1 space-y-1 overflow-y-auto">
-            <div className="px-3 pb-2 pt-1 text-[10px] font-black tracking-widest text-slate-400 dark:text-slate-500 uppercase font-mono">
+            <div className="px-3 pb-2 pt-1 text-[10px] font-black tracking-widest text-slate-600 dark:text-slate-400 uppercase font-mono">
               COMMAND VIEWPORTS
             </div>
 
@@ -306,7 +306,7 @@ export const Header = memo(function Header() {
 
                       <div className="flex flex-col text-left min-w-0">
                         <span className="truncate">{tab.label}</span>
-                        <span className="text-[10px] font-normal text-slate-400 dark:text-slate-500 truncate">
+                        <span className="text-[10px] font-normal text-slate-500 dark:text-slate-400 truncate">
                           {tab.subtitle}
                         </span>
                       </div>
@@ -393,7 +393,7 @@ export const Header = memo(function Header() {
                 type="button"
                 onClick={toggleTheme}
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
-                className="w-full py-1.5 rounded-xl flex items-center justify-center text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 transition-colors shadow-2xs cursor-pointer active:scale-95"
+                className="w-full py-1.5 rounded-xl flex items-center justify-center text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 transition-colors shadow-2xs cursor-pointer active:scale-95"
               >
                 {theme === 'light' ? <MoonIcon size={14} /> : <SunIcon size={14} />}
               </button>
@@ -493,7 +493,7 @@ export const Header = memo(function Header() {
                 {/* Mobile Active Sector Widget */}
                 <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs">
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 font-mono">Current Sector</span>
+                    <span className="text-[10px] uppercase font-bold text-slate-600 dark:text-slate-400 font-mono">Current Sector</span>
                     <span className="font-mono font-bold" style={{ color: aqiColor }}>
                       AQI {selectedZone.aqi}
                     </span>
@@ -503,7 +503,7 @@ export const Header = memo(function Header() {
 
                 {/* Mobile Nav Tabs */}
                 <div className="flex flex-col gap-1.5">
-                  <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 font-mono px-1">
+                  <div className="text-[10px] font-black uppercase tracking-wider text-slate-600 dark:text-slate-400 font-mono px-1">
                     Navigation
                   </div>
                   {tabs.map((tab) => {
@@ -520,7 +520,7 @@ export const Header = memo(function Header() {
                             : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60'
                         }`}
                       >
-                        <span className={isActive ? 'text-cyan-600 dark:text-cyan-400' : 'text-slate-400'}>
+                        <span className={isActive ? 'text-cyan-600 dark:text-cyan-400' : 'text-slate-500 dark:text-slate-400'}>
                           {tab.icon}
                         </span>
                         <span>{tab.label}</span>
@@ -546,7 +546,7 @@ export const Header = memo(function Header() {
 
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div>
-                    <label htmlFor="mobile-lang" className="block text-[10px] font-bold text-slate-400 mb-1">
+                    <label htmlFor="mobile-lang" className="block text-[10px] font-bold text-slate-600 dark:text-slate-400 mb-1">
                       Language
                     </label>
                     <select
@@ -563,7 +563,7 @@ export const Header = memo(function Header() {
                   </div>
 
                   <div>
-                    <label htmlFor="mobile-a11y" className="block text-[10px] font-bold text-slate-400 mb-1">
+                    <label htmlFor="mobile-a11y" className="block text-[10px] font-bold text-slate-600 dark:text-slate-400 mb-1">
                       Accessibility
                     </label>
                     <select

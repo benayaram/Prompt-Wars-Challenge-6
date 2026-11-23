@@ -93,10 +93,10 @@ const AppShell = memo(function AppShell() {
 
       {/* 2. Main Content Canvas Area (With desktop left margin to clear fixed sidebar) */}
       <div className="flex-1 lg:pl-72 flex flex-col min-h-screen min-w-0 relative z-10 transition-all duration-200">
-        {/* Desktop Top Workspace Utility Bar */}
-        <div className="hidden lg:flex items-center justify-between px-6 xl:px-8 py-3.5 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/60 dark:bg-[#070b16]/70 backdrop-blur-xl sticky top-0 z-30">
+        {/* Top Workspace Utility Bar with Single Document H1 */}
+        <div className="flex items-center justify-between px-4 sm:px-6 xl:px-8 py-3.5 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/60 dark:bg-[#070b16]/70 backdrop-blur-xl sticky top-0 z-30">
           <div className="flex items-center gap-3">
-            <span className="text-xs font-mono font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+            <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               WORKSPACE
             </span>
             <span className="text-slate-300 dark:text-slate-700">/</span>
@@ -104,8 +104,8 @@ const AppShell = memo(function AppShell() {
               {getTabTitle(activeTab)}
             </h1>
             <span className="text-slate-300 dark:text-slate-700">•</span>
-            <span className="text-xs text-slate-500 dark:text-slate-400">
-              Station: <strong className="text-slate-700 dark:text-slate-300">{selectedZone.zoneName}</strong>
+            <span className="text-xs text-slate-600 dark:text-slate-400">
+              Station: <strong className="text-slate-800 dark:text-slate-200">{selectedZone.zoneName}</strong>
             </span>
           </div>
 
@@ -118,7 +118,7 @@ const AppShell = memo(function AppShell() {
               Gemini 3.1 Neural Core
             </span>
             <span className="text-slate-300 dark:text-slate-700 hidden xl:inline">•</span>
-            <span className="text-slate-500 dark:text-slate-400 font-mono text-[11px] hidden xl:inline">
+            <span className="text-slate-600 dark:text-slate-400 font-mono text-[11px] hidden xl:inline">
               Zero-Trust Architecture
             </span>
           </div>
@@ -127,15 +127,19 @@ const AppShell = memo(function AppShell() {
         {/* Global Alert Banner Overlay */}
         <AlertBanner alerts={alerts} onDismiss={dismissAlert} />
 
-        {/* 3. Primary Semantic Landmark Viewport */}
+        {/* 3. Primary Semantic Landmark Viewport (Clean landmark without tabpanel roles) */}
         <main
           id="main-content"
-          role="tabpanel"
-          aria-labelledby={`tab-${activeTab}`}
-          tabIndex={-1}
           className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 focus:outline-none relative z-10"
         >
-          <div className="transition-opacity duration-200">
+          {/* Inner Tabpanel with role="tabpanel" and exact matching ID for aria-controls */}
+          <div
+            role="tabpanel"
+            id={`panel-${activeTab}`}
+            aria-labelledby={`tab-${activeTab}`}
+            tabIndex={0}
+            className="transition-opacity duration-200 outline-none"
+          >
             {activeTab === TabId.Dashboard && <AirTelemetryDashboard />}
             <Suspense fallback={<TabLoadingSkeleton />}>
               {activeTab === TabId.Routine && <DailyRoutineOptimizer />}

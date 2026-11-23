@@ -130,9 +130,9 @@ export const AirTelemetryDashboard = memo(function AirTelemetryDashboard() {
           <div className="lg:col-span-5 flex flex-col justify-between gap-6">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-[11px] uppercase font-extrabold tracking-widest text-slate-500 dark:text-slate-400 font-mono">
+                <h2 className="text-xs uppercase font-extrabold tracking-widest text-slate-600 dark:text-slate-400 font-mono">
                   Real-Time Air Quality Index
-                </span>
+                </h2>
                 <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                   EPA Scale
                 </span>
@@ -175,7 +175,7 @@ export const AirTelemetryDashboard = memo(function AirTelemetryDashboard() {
 
             {/* EPA/NAAQ Multi-Segment AQI Spectrum Scale (0-500) */}
             <div className="flex flex-col gap-2 pt-2 p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-900/50 border border-slate-200/70 dark:border-slate-800/70">
-              <div className="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 font-mono font-bold">
+              <div className="flex items-center justify-between text-[10px] text-slate-700 dark:text-slate-300 font-mono font-bold">
                 <span>0 (Good / Clean)</span>
                 <span>Current: {currentZone.aqi} AQI</span>
                 <span>500 (Hazardous)</span>

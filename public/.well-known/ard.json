@@ -1,0 +1,53 @@
+{
+  "$schema": "https://agentic-resource-discovery.org/schemas/v0.91/ard.json",
+  "version": "0.91",
+  "title": "BreatheWay Clean Air Navigation & Telemetry Resource Directory",
+  "description": "Agentic Resource Directory for the BreatheWay hyperlocal air quality and personal exposure management platform.",
+  "entries": [
+    {
+      "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:dashboard",
+      "displayName": "Air Telemetry Dashboard",
+      "type": "service",
+      "url": "https://prompt-wars-challenge-6.vercel.app/#dashboard"
+    },
+    {
+      "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:routine",
+      "displayName": "GenAI Daily Routine Optimizer",
+      "type": "service",
+      "url": "https://prompt-wars-challenge-6.vercel.app/#routine"
+    },
+    {
+      "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:transit",
+      "displayName": "Low-Exposure Transit Routing Engine",
+      "type": "service",
+      "url": "https://prompt-wars-challenge-6.vercel.app/#transit"
+    },
+    {
+      "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:iaq",
+      "displayName": "Indoor Air Quality & CADR Center",
+      "type": "service",
+      "url": "https://prompt-wars-challenge-6.vercel.app/#iaq"
+    },
+    {
+      "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:community",
+      "displayName": "Community Smog Abatement Hub",
+      "type": "service",
+      "url": "https://prompt-wars-challenge-6.vercel.app/#community"
+    },
+    {
+      "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:telemetry-schema",
+      "displayName": "Air Quality Telemetry Specification & Standards",
+      "type": "dataset",
+      "data": {
+        "standard": "US EPA NAAQS Breakpoints",
+        "pollutants": ["PM2.5", "PM10", "NO2", "O3", "CO", "SO2"],
+        "aqiScale": { "min": 0, "max": 500 },
+        "sectorsMonitored": 5,
+        "routingEngine": "Dijkstra Exposure-Weighted Corridors",
+        "iaqModel": "CADR / Air Changes per Hour (ACH)",
+        "compliance": "WCAG 2.2 AA",
+        "zeroTrust": true
+      }
+    }
+  ]
+}

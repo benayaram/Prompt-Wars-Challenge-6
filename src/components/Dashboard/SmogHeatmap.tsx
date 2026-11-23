@@ -74,20 +74,20 @@ export const SmogHeatmap = memo(function SmogHeatmap({
 
         {/* Precision Color Legend */}
         <div className="flex items-center gap-1.5 text-[10px] font-semibold bg-slate-50 dark:bg-slate-900/90 px-3 py-1.5 rounded-xl border border-slate-200/80 dark:border-slate-800 shrink-0">
-          <span className="text-slate-400 font-mono mr-1">AQI:</span>
-          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40">
+          <span className="text-slate-700 dark:text-slate-300 font-mono mr-1 font-bold">AQI:</span>
+          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 font-bold">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
             &lt;50
           </span>
-          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40">
+          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-amber-900 dark:text-amber-200 bg-amber-50 dark:bg-amber-950/50 font-bold">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
             51-150
           </span>
-          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-orange-700 dark:text-orange-300 bg-orange-50 dark:bg-orange-950/40">
+          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-orange-900 dark:text-orange-200 bg-orange-50 dark:bg-orange-950/50 font-bold">
             <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
             151-200
           </span>
-          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/40">
+          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-rose-900 dark:text-rose-200 bg-rose-50 dark:bg-rose-950/50 font-bold">
             <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
             &gt;200
           </span>
@@ -109,9 +109,9 @@ export const SmogHeatmap = memo(function SmogHeatmap({
       {/* Native High-Performance SVG Geospatial Heatmap Canvas */}
       <div className="w-full bg-slate-50 dark:bg-[#050b17] rounded-2xl border border-slate-200/90 dark:border-slate-800/90 p-2 sm:p-3 overflow-hidden relative shadow-inner transition-colors duration-200" style={{ aspectRatio: '620 / 330' }}>
         {/* Top-Right In-Canvas HUD Telemetry Badge */}
-        <div className="absolute top-4 right-4 z-10 hidden sm:flex items-center gap-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-200/80 dark:border-slate-800 text-[10px] font-mono text-slate-600 dark:text-slate-400">
+        <div className="absolute top-4 right-4 z-10 hidden sm:flex items-center gap-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-200/80 dark:border-slate-800 text-[10px] font-mono text-slate-700 dark:text-slate-300 font-semibold">
           <span>MESH: {zones.length}/5 ONLINE</span>
-          <span className="text-slate-300 dark:text-slate-700">•</span>
+          <span className="text-slate-400 dark:text-slate-600">•</span>
           <span>ELEV: ~420m AGL</span>
         </div>
 
@@ -119,8 +119,8 @@ export const SmogHeatmap = memo(function SmogHeatmap({
           viewBox="0 0 620 330"
           width="620"
           height="330"
-          aria-hidden="true"
-          role="presentation"
+          role="group"
+          aria-label="Interactive city air quality sector map"
           className="w-full h-auto max-h-[350px] select-none"
           style={{ aspectRatio: '620 / 330' }}
         >
@@ -178,12 +178,12 @@ export const SmogHeatmap = memo(function SmogHeatmap({
           <line x1="310" y1="145" x2="310" y2="165" stroke={isDark ? '#38bdf8' : '#0284c7'} strokeWidth="0.8" opacity="0.5" />
 
           {/* Radar Radial Distance Markers */}
-          <text x="314" y="85" fill={isDark ? '#475569' : '#94a3b8'} fontSize="8" fontFamily="monospace" opacity="0.8">2.5 KM</text>
-          <text x="314" y="25" fill={isDark ? '#475569' : '#94a3b8'} fontSize="8" fontFamily="monospace" opacity="0.6">5.0 KM</text>
+          <text x="314" y="85" fill={isDark ? '#94a3b8' : '#334155'} fontSize="8" fontFamily="monospace" fontWeight="bold">2.5 KM</text>
+          <text x="314" y="25" fill={isDark ? '#94a3b8' : '#334155'} fontSize="8" fontFamily="monospace" fontWeight="bold">5.0 KM</text>
 
           {/* Coordinate Axis Labels along edges */}
-          <text x="20" y="20" fill={isDark ? '#475569' : '#94a3b8'} fontSize="8" fontFamily="monospace">28°42&apos;N / 77°06&apos;E</text>
-          <text x="530" y="320" fill={isDark ? '#475569' : '#94a3b8'} fontSize="8" fontFamily="monospace">28°32&apos;N / 77°22&apos;E</text>
+          <text x="20" y="20" fill={isDark ? '#94a3b8' : '#334155'} fontSize="8" fontFamily="monospace" fontWeight="bold">28°42&apos;N / 77°06&apos;E</text>
+          <text x="510" y="320" fill={isDark ? '#94a3b8' : '#334155'} fontSize="8" fontFamily="monospace" fontWeight="bold">28°32&apos;N / 77°22&apos;E</text>
 
           {/* Authentic Atmospheric Dispersion Heat Plumes */}
           {zones.map((zone, idx) => {
