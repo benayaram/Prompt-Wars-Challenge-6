@@ -165,7 +165,7 @@ const AppShell = memo(function AppShell() {
                 <span className="font-bold text-slate-900 dark:text-white tracking-tight">
                   {BRANDING.productName}
                 </span>
-                <span className="text-slate-500 dark:text-slate-400 font-mono text-[10px] px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/60">
+                <span className="text-slate-700 dark:text-slate-300 font-mono text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/60">
                   {BRANDING.version}
                 </span>
               </div>
@@ -178,12 +178,12 @@ const AppShell = memo(function AppShell() {
                 Community Engine
               </span>
               <span className="hidden sm:inline text-slate-300 dark:text-slate-700" aria-hidden="true">•</span>
-              <span className="font-medium text-cyan-600 dark:text-cyan-400">WCAG 2.2 Level AA Compliant</span>
+              <span className="font-semibold text-cyan-800 dark:text-cyan-300">WCAG 2.2 Level AA Compliant</span>
               <span className="hidden sm:inline text-slate-300 dark:text-slate-700" aria-hidden="true">•</span>
               <span>EPA Breakpoints Standardized</span>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-3 text-[11px] text-slate-500 dark:text-slate-400">
+            <div className="flex flex-wrap items-center justify-center gap-3 text-[11px] text-slate-600 dark:text-slate-300">
               <span className="flex items-center gap-1.5 font-medium text-cyan-700 dark:text-cyan-400 px-2.5 py-1 rounded-full bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200/60 dark:border-cyan-800/60">
                 <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>

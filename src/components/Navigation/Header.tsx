@@ -345,7 +345,7 @@ export const Header = memo(function Header() {
                   </span>
                 </div>
               </div>
-              <span className="text-[10px] text-cyan-600 dark:text-cyan-400 font-semibold">
+              <span className="text-[10px] text-cyan-800 dark:text-cyan-300 font-bold">
                 {currentUser ? 'Active' : 'Sign In'}
               </span>
             </button>

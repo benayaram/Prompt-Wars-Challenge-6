@@ -57,9 +57,9 @@ export const AlertBanner = memo(function AlertBanner({
                 >
                   {alert.zone}
                 </span>
-                <h4 className="font-bold text-sm text-slate-900 dark:text-white mt-1 leading-snug">
+                <h2 className="font-bold text-sm text-slate-900 dark:text-white mt-1 leading-snug">
                   {alert.headline}
-                </h4>
+                </h2>
               </div>
             </div>
             <button

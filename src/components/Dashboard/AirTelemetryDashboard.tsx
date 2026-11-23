@@ -101,8 +101,8 @@ export const AirTelemetryDashboard = memo(function AirTelemetryDashboard() {
 
           {/* Telemetry Simulation Engine Toolbar */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-slate-500 dark:text-slate-400 font-bold flex items-center gap-1.5 mr-1">
-              <RefreshIcon size={13} className="text-slate-400" />
+            <span className="text-xs text-slate-700 dark:text-slate-300 font-bold flex items-center gap-1.5 mr-1">
+              <RefreshIcon size={13} className="text-slate-600 dark:text-slate-400" />
               Simulator:
             </span>
             <button
@@ -152,11 +152,22 @@ export const AirTelemetryDashboard = memo(function AirTelemetryDashboard() {
 
                 <div className="flex flex-col gap-2">
                   <div
-                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider border shadow-xs w-fit"
+                    className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider border shadow-xs w-fit ${
+                      currentZone.aqi > 300
+                        ? 'text-rose-900 dark:text-rose-200'
+                        : currentZone.aqi > 200
+                        ? 'text-purple-900 dark:text-purple-200'
+                        : currentZone.aqi > 150
+                        ? 'text-red-900 dark:text-red-200'
+                        : currentZone.aqi > 100
+                        ? 'text-orange-900 dark:text-orange-200'
+                        : currentZone.aqi > 50
+                        ? 'text-amber-900 dark:text-amber-200'
+                        : 'text-emerald-900 dark:text-emerald-200'
+                    }`}
                     style={{
                       backgroundColor: `${aqiColor}18`,
                       borderColor: `${aqiColor}50`,
-                      color: aqiColor,
                     }}
                   >
                     <span className="w-2 h-2 rounded-full animate-ping" style={{ backgroundColor: aqiColor }} />
@@ -245,7 +256,7 @@ export const AirTelemetryDashboard = memo(function AirTelemetryDashboard() {
 
               <div className="text-[11px] text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/60 dark:border-slate-800/60 font-mono flex items-center justify-between">
                 <span>Dispersion Velocity:</span>
-                <span className={currentZone.windSpeedKmh < 5 ? 'text-amber-600 dark:text-amber-400 font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800/50' : 'text-emerald-600 dark:text-emerald-400 font-bold px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/50'}>
+                <span className={currentZone.windSpeedKmh < 5 ? 'text-amber-800 dark:text-amber-300 font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800/50' : 'text-emerald-800 dark:text-emerald-300 font-bold px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/50'}>
                   {currentZone.windSpeedKmh < 5 ? 'Stagnant Airflow' : 'Active Ventilation'}
                 </span>
               </div>
@@ -434,12 +445,12 @@ export const AirTelemetryDashboard = memo(function AirTelemetryDashboard() {
             <span className="text-slate-300 dark:text-slate-700">•</span>
             <span>
               Peak:{' '}
-              <strong className="text-rose-600 dark:text-rose-400">{peakZone.zoneName} ({peakZone.aqi})</strong>
+              <strong className="text-rose-700 dark:text-rose-300 font-bold">{peakZone.zoneName} ({peakZone.aqi})</strong>
             </span>
             <span className="text-slate-300 dark:text-slate-700 hidden sm:inline">•</span>
             <span className="hidden sm:inline">
               Cleanest:{' '}
-              <strong className="text-emerald-600 dark:text-emerald-400">{cleanestZone.zoneName} ({cleanestZone.aqi})</strong>
+              <strong className="text-emerald-800 dark:text-emerald-300 font-bold">{cleanestZone.zoneName} ({cleanestZone.aqi})</strong>
             </span>
           </div>
         </div>
