@@ -60,15 +60,15 @@ export const DailyRoutineOptimizer = memo(function DailyRoutineOptimizer() {
       className="flex flex-col gap-8 fade-in"
     >
       {/* Persona Selection & Hero Console */}
-      <div className="glass-panel-elevated rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col gap-6 relative overflow-hidden">
+      <div className="glass-panel-elevated rounded-3xl p-6 sm:p-8 flex flex-col gap-6 relative overflow-hidden border border-slate-200/90 dark:border-slate-800 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div className="max-w-2xl">
             <div className="flex flex-wrap items-center gap-2 mb-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold font-mono tracking-wide bg-violet-50 dark:bg-violet-950/70 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-800/80">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold font-mono tracking-wide bg-violet-50 dark:bg-violet-950/70 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-800/80 shadow-2xs">
                 <SparklesIcon size={13} className="text-violet-600 dark:text-violet-400" />
                 NEURAL SCHEDULE ENGINE
               </span>
-              <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400 px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400 px-2.5 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
                 Gemini 3.1 Flash Lite
               </span>
             </div>
@@ -76,7 +76,7 @@ export const DailyRoutineOptimizer = memo(function DailyRoutineOptimizer() {
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
               GenAI Daily Routine & Smog Exposure Optimizer
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1.5 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
               Select your family or lifestyle vulnerability profile to generate hour-by-hour exposure mitigation routines.
             </p>
           </div>
@@ -86,7 +86,7 @@ export const DailyRoutineOptimizer = memo(function DailyRoutineOptimizer() {
               type="button"
               onClick={handleGenerate}
               disabled={isLoading}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-600/20 active:translate-y-px transition-all disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-slate-950 flex items-center justify-center gap-2.5 border border-emerald-400/30"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-2xl font-bold text-sm bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-600/25 active:scale-95 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-slate-950 flex items-center justify-center gap-2.5 border border-emerald-400/30 cursor-pointer"
             >
               {isLoading ? (
                 <>
@@ -107,13 +107,13 @@ export const DailyRoutineOptimizer = memo(function DailyRoutineOptimizer() {
         </div>
 
         {/* Persona Selector Segmented Grid */}
-        <fieldset className="flex flex-col gap-3 relative z-10 pt-2 border-t border-slate-200 dark:border-slate-800">
+        <fieldset className="flex flex-col gap-3.5 relative z-10 pt-4 border-t border-slate-200/80 dark:border-slate-800/80">
           <legend className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-2">
             <UserIcon size={14} className="text-emerald-600 dark:text-emerald-400" />
             <span>Target Family & Commuter Persona:</span>
           </legend>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {personas.map((p: PersonaProfile) => {
               const isSelected = p.id === activePersona.id;
               const isHighRisk = p.sensitivityLevel === 'high';
@@ -124,17 +124,17 @@ export const DailyRoutineOptimizer = memo(function DailyRoutineOptimizer() {
                   type="button"
                   aria-pressed={isSelected}
                   onClick={() => setActivePersona(p)}
-                  className={`group p-4 sm:p-5 rounded-2xl border text-left transition-all duration-150 flex flex-col justify-between gap-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-1 dark:focus:ring-offset-slate-900 relative ${
+                  className={`group p-5 rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between gap-3.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-1 dark:focus:ring-offset-slate-900 relative cursor-pointer ${
                     isSelected
-                      ? 'bg-emerald-50/70 dark:bg-emerald-950/30 border-emerald-500 dark:border-emerald-500 shadow-sm ring-1 ring-emerald-500/40'
-                      : 'bg-white/80 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50/50 dark:hover:bg-slate-800/40'
+                      ? 'bg-gradient-to-b from-emerald-50/90 to-white dark:from-emerald-950/40 dark:to-slate-900 border-emerald-500 dark:border-emerald-500 shadow-md ring-1 ring-emerald-500/40'
+                      : 'bg-white/80 dark:bg-slate-900/60 border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50/80 dark:hover:bg-slate-800/40 hover:-translate-y-0.5 hover:shadow-xs'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2 w-full">
                     <span
-                      className={`font-bold text-sm tracking-tight ${
+                      className={`font-extrabold text-sm sm:text-base tracking-tight ${
                         isSelected
-                          ? 'text-emerald-950 dark:text-emerald-100 font-extrabold'
+                          ? 'text-emerald-950 dark:text-emerald-100'
                           : 'text-slate-900 dark:text-slate-100'
                       }`}
                     >
@@ -142,10 +142,10 @@ export const DailyRoutineOptimizer = memo(function DailyRoutineOptimizer() {
                     </span>
 
                     <span
-                      className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border shrink-0 ${
+                      className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border shrink-0 ${
                         isHighRisk
-                          ? 'bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-800/80'
-                          : 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800/80'
+                          ? 'bg-rose-100/80 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-800/80'
+                          : 'bg-amber-100/80 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800/80'
                       }`}
                     >
                       {p.sensitivityLevel} Risk
@@ -156,10 +156,10 @@ export const DailyRoutineOptimizer = memo(function DailyRoutineOptimizer() {
                     {p.description}
                   </p>
 
-                  <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800/60 text-[11px] text-slate-500 dark:text-slate-400">
-                    <span>Baseline Exposure</span>
-                    <span className="font-mono font-medium text-slate-700 dark:text-slate-300">
-                      {isHighRisk ? 'Sensitive' : 'Standard'}
+                  <div className="flex items-center justify-between pt-2.5 border-t border-slate-100 dark:border-slate-800/60 text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                    <span>Baseline Exposure Profile</span>
+                    <span className="font-mono font-bold text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">
+                      {isHighRisk ? 'High Sensitivity' : 'Standard'}
                     </span>
                   </div>
                 </button>

@@ -60,10 +60,10 @@ export const CommunityHub = memo(function CommunityHub() {
       className="flex flex-col gap-8 fade-in"
     >
       {/* Top Collective Impact KPI Banner */}
-      <div className="glass-panel-elevated bg-gradient-to-br from-emerald-50/90 via-white to-slate-50 dark:from-emerald-950/30 dark:via-slate-900/90 dark:to-slate-900 border-emerald-300 dark:border-emerald-800/80 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative overflow-hidden shadow-sm">
+      <div className="glass-panel-elevated bg-gradient-to-br from-emerald-50/90 via-white to-slate-50 dark:from-emerald-950/40 dark:via-slate-900/90 dark:to-slate-900 border-emerald-300 dark:border-emerald-800/80 rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative overflow-hidden shadow-sm">
         <div className="max-w-xl">
           <div className="flex items-center gap-2 mb-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold font-mono tracking-wide bg-emerald-100/90 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/80">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold font-mono tracking-wide bg-emerald-100/90 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/80 shadow-2xs">
               <UsersIcon size={13} className="text-emerald-600 dark:text-emerald-400" />
               COLLECTIVE NEIGHBORHOOD RESILIENCE
             </span>
@@ -79,26 +79,26 @@ export const CommunityHub = memo(function CommunityHub() {
 
         {/* Impact Counters */}
         <div className="flex flex-wrap sm:flex-nowrap gap-4 shrink-0">
-          <div className="glass-panel border-emerald-300 dark:border-emerald-800/80 rounded-2xl p-5 text-center min-w-[145px] flex-1 sm:flex-none shadow-sm">
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider block">
+          <div className="glass-panel border-emerald-300 dark:border-emerald-800/80 rounded-2xl p-5 sm:p-6 text-center min-w-[155px] flex-1 sm:flex-none shadow-xs hover:border-emerald-400 dark:hover:border-emerald-700 transition-colors">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-black tracking-wider block font-mono">
               CO₂ Prevented
             </span>
-            <div className="text-3xl sm:text-4xl font-black text-emerald-700 dark:text-emerald-400 mt-1 font-mono tracking-tight">
+            <div className="text-3xl sm:text-4xl font-black text-emerald-700 dark:text-emerald-400 mt-1 font-mono tracking-tight font-mono-numbers">
               {collectiveMetrics.totalCo2Kg} <span className="text-xs text-slate-400 font-normal">kg</span>
             </div>
-            <span className="text-[10px] text-emerald-700 dark:text-emerald-400 mt-1 block font-medium">
+            <span className="text-[10px] text-emerald-700 dark:text-emerald-400 mt-1.5 block font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60">
               Carbon Curbs Active
             </span>
           </div>
 
-          <div className="glass-panel border-sky-300 dark:border-sky-800/80 rounded-2xl p-5 text-center min-w-[145px] flex-1 sm:flex-none shadow-sm">
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider block">
+          <div className="glass-panel border-sky-300 dark:border-sky-800/80 rounded-2xl p-5 sm:p-6 text-center min-w-[155px] flex-1 sm:flex-none shadow-xs hover:border-sky-400 dark:hover:border-sky-700 transition-colors">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-black tracking-wider block font-mono">
               PM2.5 Averted
             </span>
-            <div className="text-3xl sm:text-4xl font-black text-sky-700 dark:text-sky-400 mt-1 font-mono tracking-tight">
+            <div className="text-3xl sm:text-4xl font-black text-sky-700 dark:text-sky-400 mt-1 font-mono tracking-tight font-mono-numbers">
               {collectiveMetrics.totalPm25Grams} <span className="text-xs text-slate-400 font-normal">g</span>
             </div>
-            <span className="text-[10px] text-sky-700 dark:text-sky-400 mt-1 block font-medium">
+            <span className="text-[10px] text-sky-700 dark:text-sky-400 mt-1.5 block font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/60 border border-sky-200/60 dark:border-sky-800/60">
               Pulmonary Relief
             </span>
           </div>
@@ -106,14 +106,14 @@ export const CommunityHub = memo(function CommunityHub() {
       </div>
 
       {/* Emergency Smog Hazard Advisories & AI Generator */}
-      <div className="glass-panel rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col gap-6">
+      <div className="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col gap-6 border border-slate-200/90 dark:border-slate-800 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight flex items-center gap-2.5">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" aria-hidden="true" />
               <span>Multilingual Emergency Smog Advisories</span>
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               Live automated broadcast generation for neighborhood associations and school boards.
             </p>
           </div>
@@ -122,7 +122,7 @@ export const CommunityHub = memo(function CommunityHub() {
             type="button"
             onClick={handleGenerateAdvisory}
             disabled={isGenerating}
-            className="px-5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-sm shadow-emerald-600/30 border border-emerald-400/30 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 flex items-center justify-center gap-2 shrink-0"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-sm shadow-emerald-600/30 border border-emerald-400/30 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 flex items-center justify-center gap-2 shrink-0 cursor-pointer active:scale-95"
           >
             <SparklesIcon size={14} />
             <span>{isGenerating ? 'Synthesizing Broadcast…' : 'Generate Localized Advisory'}</span>
