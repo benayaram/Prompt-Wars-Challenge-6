@@ -107,7 +107,7 @@ export const SmogHeatmap = memo(function SmogHeatmap({
       </ul>
 
       {/* Native High-Performance SVG Geospatial Heatmap Canvas */}
-      <div className="w-full bg-slate-50 dark:bg-[#050b17] rounded-2xl border border-slate-200/90 dark:border-slate-800/90 p-2 sm:p-3 overflow-hidden relative shadow-inner transition-colors duration-200">
+      <div className="w-full bg-slate-50 dark:bg-[#050b17] rounded-2xl border border-slate-200/90 dark:border-slate-800/90 p-2 sm:p-3 overflow-hidden relative shadow-inner transition-colors duration-200" style={{ aspectRatio: '620 / 330' }}>
         {/* Top-Right In-Canvas HUD Telemetry Badge */}
         <div className="absolute top-4 right-4 z-10 hidden sm:flex items-center gap-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-200/80 dark:border-slate-800 text-[10px] font-mono text-slate-600 dark:text-slate-400">
           <span>MESH: {zones.length}/5 ONLINE</span>
@@ -117,9 +117,12 @@ export const SmogHeatmap = memo(function SmogHeatmap({
 
         <svg
           viewBox="0 0 620 330"
+          width="620"
+          height="330"
           aria-hidden="true"
           role="presentation"
           className="w-full h-auto max-h-[350px] select-none"
+          style={{ aspectRatio: '620 / 330' }}
         >
           <defs>
             {/* Background Map Gradient */}

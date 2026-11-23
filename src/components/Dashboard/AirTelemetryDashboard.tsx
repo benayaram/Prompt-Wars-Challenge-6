@@ -108,7 +108,7 @@ export const AirTelemetryDashboard = memo(function AirTelemetryDashboard() {
             <button
               type="button"
               onClick={simulateSmogSpike}
-              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/60 dark:hover:bg-rose-900/80 border border-rose-200 dark:border-rose-800/60 text-rose-700 dark:text-rose-200 transition-all focus:outline-none focus:ring-2 focus:ring-rose-500 active:scale-95 shadow-2xs flex items-center gap-1.5 cursor-pointer"
+              className="px-3.5 py-2.5 min-h-[44px] rounded-xl text-xs font-bold bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/60 dark:hover:bg-rose-900/80 border border-rose-200 dark:border-rose-800/60 text-rose-700 dark:text-rose-200 transition-all focus:outline-none focus:ring-2 focus:ring-rose-500 active:scale-95 shadow-2xs flex items-center gap-1.5 cursor-pointer"
             >
               <span>⚡</span>
               <span>Simulate Winter Smog Spike (+45 AQI)</span>
@@ -116,7 +116,7 @@ export const AirTelemetryDashboard = memo(function AirTelemetryDashboard() {
             <button
               type="button"
               onClick={simulateCleanDispersion}
-              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-50 hover:bg-cyan-100 dark:bg-cyan-950/60 dark:hover:bg-cyan-900/80 border border-cyan-200 dark:border-cyan-800/60 text-cyan-700 dark:text-cyan-200 transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500 active:scale-95 shadow-2xs flex items-center gap-1.5 cursor-pointer"
+              className="px-3.5 py-2.5 min-h-[44px] rounded-xl text-xs font-bold bg-cyan-50 hover:bg-cyan-100 dark:bg-cyan-950/60 dark:hover:bg-cyan-900/80 border border-cyan-200 dark:border-cyan-800/60 text-cyan-700 dark:text-cyan-200 transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500 active:scale-95 shadow-2xs flex items-center gap-1.5 cursor-pointer"
             >
               <span>🍃</span>
               <span>Simulate Solar Wind Cleansing (-50 AQI)</span>
@@ -140,12 +140,14 @@ export const AirTelemetryDashboard = memo(function AirTelemetryDashboard() {
 
               <div className="flex items-baseline gap-5 mt-3">
                 <div className="relative">
-                  <h1
+                  <div
+                    role="text"
+                    aria-label={`Current AQI is ${currentZone.aqi}`}
                     className="text-7xl sm:text-8xl font-black tracking-tight font-mono-numbers transition-colors duration-300"
                     style={{ color: aqiColor }}
                   >
                     {currentZone.aqi}
-                  </h1>
+                  </div>
                 </div>
 
                 <div className="flex flex-col gap-2">

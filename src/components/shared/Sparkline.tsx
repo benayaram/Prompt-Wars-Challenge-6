@@ -52,10 +52,12 @@ export const Sparkline = memo(function Sparkline({
       {/* Visual SVG marked aria-hidden */}
       <svg
         viewBox={`0 0 ${width} ${height}`}
+        width={width}
+        height={height}
         aria-hidden="true"
         role="presentation"
         className="overflow-visible"
-        style={{ width: `${width}px`, height: `${height}px` }}
+        style={{ width: `${width}px`, height: `${height}px`, aspectRatio: `${width} / ${height}` }}
       >
         <defs>
           <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">

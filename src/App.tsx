@@ -2,20 +2,50 @@
 // src/App.tsx
 // Modern Enterprise AppShell: BreatheWay with Responsive Sidebar Architecture
 // Premier SaaS platform architecture (Linear/Vercel/Stripe style)
+// Optimized for Google PageSpeed Insights 100 Score
 // ============================================================
 
-import { memo } from 'react';
+import { memo, lazy, Suspense } from 'react';
 import { AppContextProvider, useAppContext } from '@/context/AppContext';
 import { TabId } from '@/types';
 import { Header } from '@/components/Navigation/Header';
 import { AlertBanner } from '@/components/shared/AlertBanner';
 import { AirTelemetryDashboard } from '@/components/Dashboard/AirTelemetryDashboard';
-import { DailyRoutineOptimizer } from '@/components/Routine/DailyRoutineOptimizer';
-import { TransitPlanner } from '@/components/Transit/TransitPlanner';
-import { IAQCenter } from '@/components/IAQ/IAQCenter';
-import { CommunityHub } from '@/components/Community/CommunityHub';
 import { BRANDING } from '@/config/branding';
 import { ShieldLogo } from '@/components/ui/Icons';
+
+// Lazy-loaded command viewports for code splitting & minimal initial bundle
+const DailyRoutineOptimizer = lazy(() =>
+  import('@/components/Routine/DailyRoutineOptimizer').then((m) => ({ default: m.DailyRoutineOptimizer }))
+);
+const TransitPlanner = lazy(() =>
+  import('@/components/Transit/TransitPlanner').then((m) => ({ default: m.TransitPlanner }))
+);
+const IAQCenter = lazy(() =>
+  import('@/components/IAQ/IAQCenter').then((m) => ({ default: m.IAQCenter }))
+);
+const CommunityHub = lazy(() =>
+  import('@/components/Community/CommunityHub').then((m) => ({ default: m.CommunityHub }))
+);
+
+function TabLoadingSkeleton() {
+  return (
+    <div
+      role="status"
+      aria-label="Loading workspace section"
+      className="space-y-6 animate-pulse min-h-[500px]"
+    >
+      <div className="h-44 rounded-3xl bg-slate-200/70 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800" />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="h-36 rounded-2xl bg-slate-200/60 dark:bg-slate-800/50" />
+        <div className="h-36 rounded-2xl bg-slate-200/60 dark:bg-slate-800/50" />
+        <div className="h-36 rounded-2xl bg-slate-200/60 dark:bg-slate-800/50" />
+      </div>
+      <div className="h-64 rounded-3xl bg-slate-200/50 dark:bg-slate-800/40" />
+      <span className="sr-only">Loading content...</span>
+    </div>
+  );
+}
 
 const AppShell = memo(function AppShell() {
   const { activeTab, alerts, dismissAlert, accessibilityMode, selectedZone } = useAppContext();
@@ -107,10 +137,12 @@ const AppShell = memo(function AppShell() {
         >
           <div className="transition-opacity duration-200">
             {activeTab === TabId.Dashboard && <AirTelemetryDashboard />}
-            {activeTab === TabId.Routine && <DailyRoutineOptimizer />}
-            {activeTab === TabId.Transit && <TransitPlanner />}
-            {activeTab === TabId.IAQ && <IAQCenter />}
-            {activeTab === TabId.Community && <CommunityHub />}
+            <Suspense fallback={<TabLoadingSkeleton />}>
+              {activeTab === TabId.Routine && <DailyRoutineOptimizer />}
+              {activeTab === TabId.Transit && <TransitPlanner />}
+              {activeTab === TabId.IAQ && <IAQCenter />}
+              {activeTab === TabId.Community && <CommunityHub />}
+            </Suspense>
           </div>
         </main>
 

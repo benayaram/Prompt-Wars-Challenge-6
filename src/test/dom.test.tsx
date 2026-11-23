@@ -15,28 +15,28 @@ import { IAQCenter } from '@/components/IAQ/IAQCenter';
 import { CommunityHub } from '@/components/Community/CommunityHub';
 
 describe('Tab Navigation Interactions', () => {
-  it('switches viewports when user clicks different tabs in header tablist', () => {
+  it('switches viewports when user clicks different tabs in header tablist', async () => {
     render(<App />);
 
     // Click Routine tab
     const routineTab = screen.getByRole('tab', { name: /Routine Optimizer/i });
     fireEvent.click(routineTab);
-    expect(screen.getByText(/GenAI Daily Routine & Smog Exposure Optimizer/i)).toBeInTheDocument();
+    expect(await screen.findByText(/GenAI Daily Routine & Smog Exposure Optimizer/i)).toBeInTheDocument();
 
     // Click Transit tab
     const transitTab = screen.getByRole('tab', { name: /Low-Emission Transit/i });
     fireEvent.click(transitTab);
-    expect(screen.getByText(/Low-Exposure Commute & Transit Path Optimizer/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Low-Exposure Commute & Transit Path Optimizer/i)).toBeInTheDocument();
 
     // Click IAQ tab
     const iaqTab = screen.getByRole('tab', { name: /Indoor Air & Hacks/i });
     fireEvent.click(iaqTab);
-    expect(screen.getByText(/Room CADR & Indoor Air Quality/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Room CADR & Indoor Air Quality/i)).toBeInTheDocument();
 
     // Click Community tab
     const communityTab = screen.getByRole('tab', { name: /Community Action/i });
     fireEvent.click(communityTab);
-    expect(screen.getByText(/Community Smog Abatement Dashboard/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Community Smog Abatement Dashboard/i)).toBeInTheDocument();
   });
 });
 

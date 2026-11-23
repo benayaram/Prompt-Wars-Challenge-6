@@ -99,7 +99,7 @@ export const ZoneCard = memo(function ZoneCard({
           onSelect(zone.zoneId);
         }}
         aria-pressed={isSelected}
-        className={`w-full py-2 rounded-xl text-xs font-bold transition-all duration-150 flex items-center justify-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer ${
+        className={`w-full py-2.5 min-h-[44px] rounded-xl text-xs font-bold transition-all duration-150 flex items-center justify-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer ${
           isSelected
             ? 'bg-cyan-600 dark:bg-cyan-500 text-white shadow-xs border border-cyan-600 dark:border-cyan-500'
             : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 dark:hover:text-white border border-slate-200 dark:border-slate-700/60'

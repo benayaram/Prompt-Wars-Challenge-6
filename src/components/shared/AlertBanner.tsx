@@ -66,7 +66,7 @@ export const AlertBanner = memo(function AlertBanner({
               type="button"
               onClick={() => onDismiss(alert.id)}
               aria-label={`Dismiss alert for ${alert.zone}`}
-              className="text-slate-400 hover:text-slate-700 dark:hover:text-white p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-rose-400 cursor-pointer"
+              className="text-slate-400 hover:text-slate-700 dark:hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-rose-400 cursor-pointer"
             >
               <CloseIcon size={14} />
             </button>

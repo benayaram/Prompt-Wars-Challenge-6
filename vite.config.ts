@@ -20,11 +20,23 @@ export default defineConfig({
     },
   },
   build: {
+    target: 'es2022',
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
         manualChunks(id: string) {
           if (id.includes('node_modules')) {
-            return 'vendor';
+            if (id.includes('firebase')) {
+              return 'vendor-firebase';
+            }
+            if (id.includes('@google/generative-ai')) {
+              return 'vendor-genai';
+            }
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor-react';
+            }
+            return 'vendor-libs';
           }
         },
       },
