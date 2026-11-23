@@ -343,6 +343,7 @@ export const SmogHeatmap = memo(function SmogHeatmap({
 
                 {/* Numeric AQI Readout */}
                 <text
+                  aria-hidden="true"
                   x={pos.cx}
                   y={pos.cy + 4.5}
                   textAnchor="middle"
@@ -368,6 +369,7 @@ export const SmogHeatmap = memo(function SmogHeatmap({
                     className="shadow-sm"
                   />
                   <text
+                    aria-hidden="true"
                     x={pos.cx}
                     y={pos.cy + 40}
                     textAnchor="middle"

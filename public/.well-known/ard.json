@@ -7,37 +7,67 @@
     {
       "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:dashboard",
       "displayName": "Air Telemetry Dashboard",
-      "type": "service",
-      "url": "https://prompt-wars-challenge-6.vercel.app/#dashboard"
+      "type": "text/html",
+      "url": "https://prompt-wars-challenge-6.vercel.app/#dashboard",
+      "representativeQueries": [
+        "air quality index",
+        "hyperlocal AQI telemetry",
+        "live smog monitoring"
+      ]
     },
     {
       "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:routine",
       "displayName": "GenAI Daily Routine Optimizer",
-      "type": "service",
-      "url": "https://prompt-wars-challenge-6.vercel.app/#routine"
+      "type": "text/html",
+      "url": "https://prompt-wars-challenge-6.vercel.app/#routine",
+      "representativeQueries": [
+        "clean air daily routine",
+        "schedule outdoor activity safe AQI",
+        "inversion forecast exercise"
+      ]
     },
     {
       "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:transit",
       "displayName": "Low-Exposure Transit Routing Engine",
-      "type": "service",
-      "url": "https://prompt-wars-challenge-6.vercel.app/#transit"
+      "type": "text/html",
+      "url": "https://prompt-wars-challenge-6.vercel.app/#transit",
+      "representativeQueries": [
+        "low exposure commute route",
+        "clean air transit navigation",
+        "smog evasion walking route"
+      ]
     },
     {
       "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:iaq",
       "displayName": "Indoor Air Quality & CADR Center",
-      "type": "service",
-      "url": "https://prompt-wars-challenge-6.vercel.app/#iaq"
+      "type": "text/html",
+      "url": "https://prompt-wars-challenge-6.vercel.app/#iaq",
+      "representativeQueries": [
+        "indoor air quality CADR calculator",
+        "air purifier coverage",
+        "clean air delivery rate"
+      ]
     },
     {
       "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:community",
       "displayName": "Community Smog Abatement Hub",
-      "type": "service",
-      "url": "https://prompt-wars-challenge-6.vercel.app/#community"
+      "type": "text/html",
+      "url": "https://prompt-wars-challenge-6.vercel.app/#community",
+      "representativeQueries": [
+        "community smog abatement",
+        "report urban pollution hotspot",
+        "clean air collective actions"
+      ]
     },
     {
       "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:telemetry-schema",
       "displayName": "Air Quality Telemetry Specification & Standards",
-      "type": "dataset",
+      "type": "application/json",
+      "representativeQueries": [
+        "EPA NAAQS breakpoint standards",
+        "PM2.5 AQI calculation",
+        "sensor mesh telemetry schema"
+      ],
       "data": {
         "standard": "US EPA NAAQS Breakpoints",
         "pollutants": ["PM2.5", "PM10", "NO2", "O3", "CO", "SO2"],
