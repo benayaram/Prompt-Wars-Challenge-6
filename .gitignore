@@ -7,6 +7,8 @@ coverage
 *.tsbuildinfo
 firebase-debug.log*
 .github/
-urban-air-demo-4min.mp4
-urban-air-demo-7min.mp4
-urba
+*.mp4
+*.webm
+*.wav
+audio-clips/
+demo-output/

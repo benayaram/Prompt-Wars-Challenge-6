@@ -42,8 +42,6 @@
     "vitest": "^3.0.6"
   },
   "devDependencies": {
-    "kokoro-js": "^1.2.1",
-    "oxlint": "^1.94.0",
-    "playwright": "^1.65.1"
+    "oxlint": "^1.94.0"
   }
 }
