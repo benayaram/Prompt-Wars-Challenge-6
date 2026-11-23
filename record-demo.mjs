@@ -286,7 +286,7 @@ async function humanScroll(page, pixels, durationMs = 1100) {
   await page.waitForTimeout(600); // Reading pause
 }
 
-async function humanType(page, selector, text) {
+export async function humanType(page, selector, text) {
   await humanClick(page, selector);
   for (const char of text) {
     await page.keyboard.type(char, { delay: Math.floor(Math.random() * 50) + 60 });

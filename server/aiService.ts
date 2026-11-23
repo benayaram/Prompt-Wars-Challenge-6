@@ -9,7 +9,44 @@ import type { ValidatedPersona, ValidatedZone } from './validators';
 const geminiApiKey = process.env.NODE_ENV === 'test' ? '' : (process.env.GEMINI_API_KEY || '');
 const aiClient = geminiApiKey ? new GoogleGenerativeAI(geminiApiKey) : null;
 
-function buildHourlySlots(persona: ValidatedPersona, zone: ValidatedZone) {
+/**
+ * Single hourly schedule block with smog defense recommendations.
+ */
+export interface HourlyScheduleSlot {
+  hour: number;
+  timeLabel: string;
+  activity: string;
+  recommendation: 'safe-outdoor' | 'moderate-caution' | 'indoor-only' | 'mask-required';
+  predictedAQI: number;
+  smogDispersionFactor: number;
+  inversionLikelihood: 'high' | 'low' | 'moderate';
+  healthImpactNotes: string;
+  environmentalOffsetNotes: string;
+}
+
+/**
+ * Complete daily routine plan with exposure score and optimal outdoor window.
+ */
+export interface HeuristicRoutineResult {
+  generatedAt: number;
+  persona: string;
+  language: string;
+  optimalOutdoorWindow: {
+    startHour: number;
+    endHour: number;
+    rationale: string;
+  };
+  hourlySchedule: HourlyScheduleSlot[];
+  totalExposureScore: number;
+  carbonOffsetKg: number;
+  generalAdvice: string[];
+}
+
+/**
+ * Generates hourly schedule slots dynamically based on persona vulnerability,
+ * current atmospheric inversion conditions, and ambient AQI.
+ */
+function buildHourlySlots(persona: ValidatedPersona, zone: ValidatedZone): HourlyScheduleSlot[] {
   const isHighRisk = persona.sensitivityLevel === 'high' || zone.aqi > 150;
   const safeStart = zone.inversionRisk ? 13 : 11;
   const safeEnd = zone.inversionRisk ? 16 : 17;
@@ -50,7 +87,19 @@ function buildHourlySlots(persona: ValidatedPersona, zone: ValidatedZone) {
   });
 }
 
-export function generateHeuristicRoutine(persona: ValidatedPersona, zone: ValidatedZone, language: string) {
+/**
+ * Computes deterministic heuristic daily routine when AI API key is unavailable or rate-limited.
+ *
+ * @param persona - Target citizen persona with sensitivity parameters
+ * @param zone - Urban zone telemetry data including AQI and inversion status
+ * @param language - ISO language code for output localization
+ * @returns Structured daily routine response
+ */
+export function generateHeuristicRoutine(
+  persona: ValidatedPersona,
+  zone: ValidatedZone,
+  language: string
+): HeuristicRoutineResult {
   const isHighRisk = persona.sensitivityLevel === 'high' || zone.aqi > 150;
   const safeStart = zone.inversionRisk ? 13 : 11;
   const safeEnd = zone.inversionRisk ? 16 : 17;
@@ -76,7 +125,20 @@ export function generateHeuristicRoutine(persona: ValidatedPersona, zone: Valida
   };
 }
 
-export async function getAiRoutineInsights(persona: ValidatedPersona, zone: ValidatedZone, cleanLang: string) {
+/**
+ * Fetches AI-generated personalized routine insights via Gemini 3.1 Flash Lite,
+ * falling back gracefully to heuristic generation upon timeout or absence of API key.
+ *
+ * @param persona - Target citizen profile
+ * @param zone - Live sector air telemetry
+ * @param cleanLang - Validated language code
+ * @returns Promise resolving to a complete routine schedule
+ */
+export async function getAiRoutineInsights(
+  persona: ValidatedPersona,
+  zone: ValidatedZone,
+  cleanLang: string
+): Promise<HeuristicRoutineResult> {
   if (aiClient) {
     try {
       const model = aiClient.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
@@ -91,7 +153,7 @@ Return ONLY a strict valid JSON object matching this structure:
 
       const aiResponse = await model.generateContent(prompt);
       const jsonMatch = aiResponse.response.text().match(/\{[\s\S]*\}/);
-      if (jsonMatch) return JSON.parse(jsonMatch[0]);
+      if (jsonMatch) return JSON.parse(jsonMatch[0]) as HeuristicRoutineResult;
     } catch (err) {
       console.error('[AI GATEWAY LOG] Routine generation fallback triggered:', err);
     }
@@ -99,6 +161,13 @@ Return ONLY a strict valid JSON object matching this structure:
   return generateHeuristicRoutine(persona, zone, cleanLang);
 }
 
+/**
+ * Generates an emergency public safety advisory message broadcast for high-AQI zones.
+ *
+ * @param zone - Current urban zone metrics
+ * @param cleanLang - Localized broadcast language
+ * @returns Urgently phrased broadcast advisory string
+ */
 export async function getEmergencyAdvisoryText(zone: ValidatedZone, cleanLang: string): Promise<string> {
   if (aiClient) {
     try {

@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
@@ -68,7 +69,6 @@ export default defineConfig({
       },
     },
   },
-  // @ts-expect-error Vitest configuration support
   test: {
     globals: true,
     environment: 'jsdom',

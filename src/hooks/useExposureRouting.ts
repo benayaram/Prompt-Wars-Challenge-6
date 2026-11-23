@@ -17,9 +17,33 @@ import {
 import {
   TransitMode,
   type TransitRouteComparison,
+  type TransitNode,
 } from '@/types';
+import type { DijkstraResult } from '@/lib/compute/dijkstraRouter';
 
-export function useExposureRouting() {
+/**
+ * Return type definition for useExposureRouting hook.
+ */
+export interface ExposureRoutingReturn {
+  nodes: TransitNode[];
+  originId: string;
+  destinationId: string;
+  originNode: TransitNode;
+  destNode: TransitNode;
+  setOrigin: (id: string) => void;
+  setDestination: (id: string) => void;
+  lowestExposureResult: DijkstraResult | null;
+  pathNodes: TransitNode[];
+  routeDistanceKm: number;
+  modalComparisons: TransitRouteComparison[];
+}
+
+/**
+ * Custom hook managing origin-destination transit routing,
+ * executing Dijkstra graph pathfinding to minimize cumulative particulate exposure,
+ * and computing multi-modal trade-offs across 7 transit categories.
+ */
+export function useExposureRouting(): ExposureRoutingReturn {
   const { selectedZone } = useAppContext();
   const [originId, setOriginId] = useState<string>('N-HOME');
   const [destinationId, setDestinationId] = useState<string>('N-WORK');

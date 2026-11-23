@@ -11,9 +11,31 @@ import {
   getAQIColor,
   evaluateInversionRisk,
 } from '@/lib/aqiCompute';
-import { PollutantType, type PollutantReading } from '@/types';
+import { PollutantType, type PollutantReading, type UrbanZone, type AQICategory } from '@/types';
+import type { InversionRiskResult } from '@/lib/compute/meteorology';
 
-export function useAirAnalytics() {
+/**
+ * Return type definition for useAirAnalytics hook.
+ */
+export interface AirAnalyticsReturn {
+  currentZone: UrbanZone;
+  aqiCategory: AQICategory;
+  aqiColor: string;
+  inversionStatus: InversionRiskResult;
+  pollutantBreakdown: PollutantReading[];
+  simulateSmogSpike: () => void;
+  simulateCleanDispersion: () => void;
+  selectZone: (zoneId: string) => void;
+  zones: UrbanZone[];
+  selectedZoneId: string;
+  setSelectedZoneId: (zoneId: string) => void;
+}
+
+/**
+ * Custom hook providing reactive real-time telemetry analytics, inversion risk assessment,
+ * pollutant breakdown sparklines, and simulation controls for the focused urban sector.
+ */
+export function useAirAnalytics(): AirAnalyticsReturn {
   const { zones, selectedZoneId, setSelectedZoneId, updateZone } = useAppContext();
 
   const currentZone = useMemo(() => {
@@ -98,22 +120,30 @@ export function useAirAnalytics() {
   const simulateCleanDispersion = useCallback(() => {
     updateZone(currentZone.zoneId, {
       aqi: Math.max(35, currentZone.aqi - 50),
-      pm25: Math.max(10, Math.round((currentZone.pm25 - 40) * 10) / 10),
+      pm25: Math.max(10, Math.round((currentZone.pm25 - 30) * 10) / 10),
       inversionRisk: false,
       history: [...currentZone.history.slice(1), Math.max(35, currentZone.aqi - 50)],
     });
   }, [currentZone, updateZone]);
 
+  const selectZone = useCallback(
+    (zoneId: string) => {
+      setSelectedZoneId(zoneId);
+    },
+    [setSelectedZoneId]
+  );
+
   return {
-    zones,
     currentZone,
-    selectedZoneId,
-    setSelectedZoneId,
     aqiCategory,
     aqiColor,
     inversionStatus,
     pollutantBreakdown,
     simulateSmogSpike,
     simulateCleanDispersion,
+    selectZone,
+    zones,
+    selectedZoneId,
+    setSelectedZoneId,
   };
 }
