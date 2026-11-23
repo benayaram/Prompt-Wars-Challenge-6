@@ -12,3 +12,7 @@ firebase-debug.log*
 *.wav
 audio-clips/
 demo-output/
+
+lighthouse-report.json
+
+lighthouse-desktop.json

@@ -7,7 +7,7 @@
     {
       "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:dashboard",
       "displayName": "Air Telemetry Dashboard",
-      "type": "text/html",
+      "type": "application/agent-card+json",
       "url": "https://prompt-wars-challenge-6.vercel.app/#dashboard",
       "representativeQueries": [
         "air quality index",
@@ -18,7 +18,7 @@
     {
       "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:routine",
       "displayName": "GenAI Daily Routine Optimizer",
-      "type": "text/html",
+      "type": "application/agent-card+json",
       "url": "https://prompt-wars-challenge-6.vercel.app/#routine",
       "representativeQueries": [
         "clean air daily routine",
@@ -29,7 +29,7 @@
     {
       "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:transit",
       "displayName": "Low-Exposure Transit Routing Engine",
-      "type": "text/html",
+      "type": "application/agent-card+json",
       "url": "https://prompt-wars-challenge-6.vercel.app/#transit",
       "representativeQueries": [
         "low exposure commute route",
@@ -40,7 +40,7 @@
     {
       "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:iaq",
       "displayName": "Indoor Air Quality & CADR Center",
-      "type": "text/html",
+      "type": "application/agent-card+json",
       "url": "https://prompt-wars-challenge-6.vercel.app/#iaq",
       "representativeQueries": [
         "indoor air quality CADR calculator",
@@ -51,7 +51,7 @@
     {
       "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:community",
       "displayName": "Community Smog Abatement Hub",
-      "type": "text/html",
+      "type": "application/agent-card+json",
       "url": "https://prompt-wars-challenge-6.vercel.app/#community",
       "representativeQueries": [
         "community smog abatement",
@@ -62,7 +62,7 @@
     {
       "identifier": "urn:air:prompt-wars-challenge-6.vercel.app:telemetry-schema",
       "displayName": "Air Quality Telemetry Specification & Standards",
-      "type": "application/json",
+      "type": "application/ai-catalog+json",
       "representativeQueries": [
         "EPA NAAQS breakpoint standards",
         "PM2.5 AQI calculation",

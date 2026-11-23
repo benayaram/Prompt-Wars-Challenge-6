@@ -253,7 +253,7 @@ export const SmogHeatmap = memo(function SmogHeatmap({
                 key={zone.zoneId}
                 tabIndex={0}
                 role="button"
-                aria-label={`Select sector ${zone.zoneName}, AQI ${zone.aqi}, Category ${zone.category}`}
+                aria-label={`${geoInfo?.code || 'SECT'}: ${geoInfo?.shortLabel || zone.zoneName} (${zone.zoneName}) — AQI ${zone.aqi}, ${zone.category}`}
                 onClick={() => onSelectZone(zone.zoneId)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {

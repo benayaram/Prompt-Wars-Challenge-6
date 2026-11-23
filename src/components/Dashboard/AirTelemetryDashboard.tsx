@@ -94,7 +94,7 @@ export const AirTelemetryDashboard = memo(function AirTelemetryDashboard() {
 
             <span className="text-slate-400 dark:text-slate-600 hidden sm:inline">•</span>
 
-            <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+            <span className="text-[11px] text-slate-800 dark:text-slate-200 font-mono font-bold">
               Synced: {new Date(currentZone.lastUpdated).toLocaleTimeString()}
             </span>
           </div>

@@ -228,11 +228,22 @@ export const Header = memo(function Header() {
               </div>
 
               <div
-                className="px-2.5 py-1 rounded-xl text-xs font-black font-mono shrink-0 border shadow-2xs"
+                className={`px-2.5 py-1 rounded-xl text-xs font-black font-mono shrink-0 border shadow-2xs ${
+                  selectedZone.aqi > 300
+                    ? 'text-rose-900 dark:text-rose-200'
+                    : selectedZone.aqi > 200
+                    ? 'text-purple-900 dark:text-purple-200'
+                    : selectedZone.aqi > 150
+                    ? 'text-red-900 dark:text-red-200'
+                    : selectedZone.aqi > 100
+                    ? 'text-orange-900 dark:text-orange-200'
+                    : selectedZone.aqi > 50
+                    ? 'text-amber-900 dark:text-amber-200'
+                    : 'text-emerald-900 dark:text-emerald-200'
+                }`}
                 style={{
                   backgroundColor: `${aqiColor}15`,
                   borderColor: `${aqiColor}40`,
-                  color: aqiColor,
                 }}
               >
                 AQI {selectedZone.aqi}
@@ -329,7 +340,7 @@ export const Header = memo(function Header() {
             <button
               type="button"
               onClick={() => setIsAuthOpen(true)}
-              aria-label={currentUser ? `Signed in as ${currentUser.name}` : 'Open Citizen & Operator Portal'}
+              aria-label={currentUser ? `Signed in as ${currentUser.name}` : 'Citizen Portal — Sign In (Secure Operator Mode)'}
               className="w-full flex items-center justify-between p-2.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800/90 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/70 shadow-2xs transition-all active:scale-98 cursor-pointer"
             >
               <div className="flex items-center gap-2.5">
