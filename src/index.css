@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
-/* Enable class and data-attribute selector dark mode in Tailwind v4 */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+@variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
 
 /* ============================================================
    BreatheWay — Precision Design System (Cyber Oceanic Aurora)
@@ -367,326 +366,60 @@ input[type="range"]:focus-visible::-webkit-slider-thumb {
 }
 
 /* ------------------------------------------------------------
-   HIGH CONTRAST MODE (Accessibility Enhancement)
+   Dark Theme High-Contrast Enforcement & Fallbacks
    ------------------------------------------------------------ */
-:root[data-contrast="high"],
-.contrast-125 {
-  --border-subtle: rgba(15, 23, 42, 0.25);
-  --border-medium: rgba(15, 23, 42, 0.35);
-  --border-strong: rgba(15, 23, 42, 0.50);
-  --text-muted: #334155;
-}
-
-:root[data-theme="dark"][data-contrast="high"],
-.dark.contrast-125,
-.dark .contrast-125 {
-  --border-subtle: rgba(255, 255, 255, 0.22);
-  --border-medium: rgba(255, 255, 255, 0.35);
-  --border-strong: rgba(255, 255, 255, 0.55);
-  --text-muted: #cbd5e1;
-}
-
-/* ------------------------------------------------------------
-   Base Document Styles
-   ------------------------------------------------------------ */
-body {
-  background-color: var(--bg-base);
+:root[data-theme="dark"],
+.dark {
+  color-scheme: dark;
   color: var(--text-primary);
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.012em;
-  overflow-x: hidden;
-  transition: background-color 0.2s ease, color 0.2s ease;
-  background-image: var(--mesh-gradient);
-  background-attachment: fixed;
 }
 
-/* WCAG 2.4.7 Focus Visible Indicator */
-:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-  border-radius: 8px;
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] button,
+:root[data-theme="dark"] option,
+.dark select,
+.dark input,
+.dark textarea,
+.dark button,
+.dark option {
+  color-scheme: dark;
 }
 
-/* ------------------------------------------------------------
-   Precision Surface Panels (Linear & Stripe Craftsmanship)
-   ------------------------------------------------------------ */
-.glass-panel {
-  background: var(--bg-surface-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-card);
-  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+/* Ensure strong contrast across dark mode for any Slate or Neutral dark text that lacks dark: classes */
+:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *) .text-slate-900:not([class*="dark:text-"]) {
+  color: #f8fafc;
 }
 
-.glass-panel-elevated {
-  background: var(--bg-surface-elevated);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-medium);
-  box-shadow: var(--shadow-elevated);
-  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *) .text-slate-800:not([class*="dark:text-"]) {
+  color: #f1f5f9;
 }
 
-.glass-panel-interactive {
-  transition: border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *) .text-slate-700:not([class*="dark:text-"]) {
+  color: #e2e8f0;
 }
 
-.glass-panel-interactive:hover {
-  border-color: var(--border-primary);
-  box-shadow: var(--shadow-interactive);
-  transform: translateY(-2px);
+:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *) .text-slate-600:not([class*="dark:text-"]) {
+  color: #cbd5e1;
 }
 
-/* Subtle dot grid pattern utility */
-.dot-pattern {
-  background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
-  background-size: 20px 20px;
+:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *) .text-slate-500:not([class*="dark:text-"]) {
+  color: #94a3b8;
 }
 
-.dark .dot-pattern {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *) .text-black:not([class*="dark:text-"]) {
+  color: #ffffff;
 }
 
-/* ------------------------------------------------------------
-   Micro-Animations & Transitions
-   ------------------------------------------------------------ */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *) .text-gray-900:not([class*="dark:text-"]) {
+  color: #f8fafc;
 }
 
-.fade-in {
-  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *) .text-gray-800:not([class*="dark:text-"]) {
+  color: #f1f5f9;
 }
 
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.04);
-  }
-}
-
-.pulse-glow {
-  animation: pulseGlow 3s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.skeleton-shimmer {
-  background: linear-gradient(90deg, rgba(15, 23, 42, 0.04) 25%, rgba(15, 23, 42, 0.08) 50%, rgba(15, 23, 42, 0.04) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.6s infinite;
-}
-
-:root[data-theme="dark"] .skeleton-shimmer,
-.dark .skeleton-shimmer {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.07) 50%, rgba(255, 255, 255, 0.03) 75%);
-}
-
-/* ------------------------------------------------------------
-   Typography Utilities
-   ------------------------------------------------------------ */
-.font-arabic {
-  font-family: 'Noto Sans Arabic', Tahoma, sans-serif;
-}
-
-.font-mono-numbers {
-  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-feature-settings: 'tnum' 1, 'zero' 1;
-  font-variant-numeric: tabular-nums;
-}
-
-/* ------------------------------------------------------------
-   Custom Sleek Scrollbar
-   ------------------------------------------------------------ */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border-medium);
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-subdued);
-}
-
-/* ------------------------------------------------------------
-   Custom Precision Range Slider
-   ------------------------------------------------------------ */
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  background: #e2e8f0;
-  height: 6px;
-  border-radius: 9999px;
-  outline: none;
-  transition: background 0.15s ease;
-}
-
-:root[data-theme="dark"] input[type="range"],
-.dark input[type="range"] {
-  background: #1e293b;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--primary);
-  cursor: pointer;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-  border: 2px solid #ffffff;
-  transition: transform 0.15s ease, background-color 0.15s ease;
-}
-
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-  background: var(--primary-hover);
-}
-
-input[type="range"]:focus-visible::-webkit-slider-thumb {
-  box-shadow: 0 0 0 3px var(--primary-subtle);
-}
-
-/* ------------------------------------------------------------
-   Micro-Animations & Transitions
-   ------------------------------------------------------------ */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.skeleton-shimmer {
-  background: linear-gradient(90deg, rgba(15, 23, 42, 0.04) 25%, rgba(15, 23, 42, 0.08) 50%, rgba(15, 23, 42, 0.04) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.6s infinite;
-}
-
-:root[data-theme="dark"] .skeleton-shimmer,
-.dark .skeleton-shimmer {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.07) 50%, rgba(255, 255, 255, 0.03) 75%);
-}
-
-/* ------------------------------------------------------------
-   Typography Utilities
-   ------------------------------------------------------------ */
-.font-arabic {
-  font-family: 'Noto Sans Arabic', Tahoma, sans-serif;
-}
-
-.font-mono-numbers {
-  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-feature-settings: 'tnum' 1, 'zero' 1;
-  font-variant-numeric: tabular-nums;
-}
-
-/* ------------------------------------------------------------
-   Custom Sleek Scrollbar
-   ------------------------------------------------------------ */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border-medium);
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-subdued);
-}
-
-/* ------------------------------------------------------------
-   Custom Precision Range Slider
-   ------------------------------------------------------------ */
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  background: #e2e8f0;
-  height: 6px;
-  border-radius: 9999px;
-  outline: none;
-  transition: background 0.15s ease;
-}
-
-:root[data-theme="dark"] input[type="range"],
-.dark input[type="range"] {
-  background: #1e293b;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--primary);
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  border: 2px solid #ffffff;
-  transition: transform 0.15s ease, background-color 0.15s ease;
-}
-
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.12);
-  background: var(--primary-hover);
-}
-
-input[type="range"]:focus-visible::-webkit-slider-thumb {
-  box-shadow: 0 0 0 3px var(--primary-subtle);
+:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *) .text-gray-700:not([class*="dark:text-"]) {
+  color: #e2e8f0;
 }
